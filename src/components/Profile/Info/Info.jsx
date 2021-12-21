@@ -7,7 +7,7 @@ const Info = () => {
     return (
         <div className={style.info}>
             <div className={style.photo}>
-                <img src={bg} alt="photo"/>
+                <img src={bg} alt="profile-bg"/>
             </div>
             <div className={style.description}>
                 <div className={style.avatar}>
