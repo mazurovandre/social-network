@@ -1,5 +1,6 @@
 .post
     display: flex
+    justify-content: space-between
     align-items: center
     margin: 20px 0
     &:last-child
@@ -17,3 +18,21 @@
 .text
     margin: 0
     padding-left: 20px
+    font-size: 18px
+    flex-grow: 1
+
+.likes
+    display: flex
+    justify-content: space-between
+    align-items: center
+    margin-left: 20px
+    svg
+        width: 35px
+        cursor: pointer
+        &:hover
+            path
+                fill: #181515
+
+.count
+    min-width: 40px
+    margin: 0 10px

@@ -11,8 +11,11 @@ const Posts = () => {
                 <button>Отправить</button>
             </form>
             <ul className={style.list}>
-                <Post />
-                <Post />
+                <Post message="Hello, it's me" likesCount="11"/>
+                <Post message="I was wondering if after all these years you'd like to meet" likesCount="123"/>
+                <Post message="To go over everything" likesCount="532"/>
+                <Post message="They say that time's supposed to heal ya" likesCount="251"/>
+                <Post message="But I ain't done much healing" likesCount="252"/>
             </ul>
         </div>
     );
