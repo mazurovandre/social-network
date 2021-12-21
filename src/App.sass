@@ -1,0 +1,16 @@
+*
+  box-sizing: border-box
+
+body
+  margin: 0
+  padding: 0
+  background-color: #EDEEF0
+
+.app-wrapper
+  display: grid
+  grid-template-areas: "header header" "sidebar content" "footer footer"
+  grid-template-columns: 20% auto
+  grid-template-rows: 80px minmax(500px, auto) 80px
+  grid-gap: 20px
+  max-width: 1200px
+  margin: 20px auto
