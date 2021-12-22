@@ -13,17 +13,27 @@
   font-size: 24px
   margin: 20px 0 30px 40px
 
-.people_list, .messages_list
+.people_list
   margin: 0
+  padding: 0
+  list-style-type: none
+
+.messages_list
+  margin: 0 40px
   padding: 0
   list-style-type: none
 
 .name
   font-size: 20px
-  padding: 20px 0 20px 40px
-  cursor: pointer
   &:hover
     background-color: #E7E8EC
+  a
+    display: block
+    padding: 20px 0 20px 40px
+    text-decoration: none
+    color: black
+  a:visited
+    color: black
 
 .message
   padding: 10px 0 10px 40px

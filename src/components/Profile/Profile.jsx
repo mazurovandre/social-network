@@ -3,11 +3,11 @@ import React from "react";
 import Info from "./Info/Info";
 import Posts from "./Posts/Posts";
 
-const Profile = () => {
+const Profile = (props) => {
     return (
         <div>
-            <Info />
-            <Posts />
+            <Info name={props.info.name} birthDate={props.info.birthDate} city={props.info.city} education={props.info.education}/>
+            <Posts posts={props.posts}/>
         </div>
     );
 }

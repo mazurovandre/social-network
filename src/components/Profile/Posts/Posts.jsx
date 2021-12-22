@@ -2,7 +2,8 @@ import React from "react";
 import style from './Posts.module.sass';
 import Post from "./Post/Post";
 
-const Posts = () => {
+const Posts = (props) => {
+    const postsData = props.posts;
     return (
         <div className={style.posts}>
             <form className={style.form}>
@@ -11,11 +12,11 @@ const Posts = () => {
                 <button>Отправить</button>
             </form>
             <ul className={style.list}>
-                <Post message="Hello, it's me" likesCount="11"/>
-                <Post message="I was wondering if after all these years you'd like to meet" likesCount="123"/>
-                <Post message="To go over everything" likesCount="532"/>
-                <Post message="They say that time's supposed to heal ya" likesCount="251"/>
-                <Post message="But I ain't done much healing" likesCount="252"/>
+                <Post message={postsData[0].message} likesCount={postsData[0].likesCount}/>
+                <Post message={postsData[1].message} likesCount={postsData[1].likesCount}/>
+                <Post message={postsData[2].message} likesCount={postsData[2].likesCount}/>
+                <Post message={postsData[3].message} likesCount={postsData[3].likesCount}/>
+                <Post message={postsData[4].message} likesCount={postsData[4].likesCount}/>
             </ul>
         </div>
     );
