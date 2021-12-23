@@ -1,8 +1,16 @@
 import React from "react";
 import style from './Sidebar.module.sass';
 import {NavLink} from "react-router-dom";
+/*import avatar from '../../images/avatar.jpg'*/
 
-const Sidebar = () => {
+const Sidebar = (props) => {
+    console.log(props.state)
+    const friends = props.state.friends.map(friend => {
+        return ( <li className={style.friends_item} key={friend.id}>
+            <img src={friend.avatar} alt="ava" width='60' height='60'/>
+            <h6 className={style.name}>{friend.name}</h6>
+        </li>)
+    });
   return (
       <aside className={style.sidebar}>
           <nav>
@@ -23,6 +31,28 @@ const Sidebar = () => {
                       <NavLink to="/settings" className={link => link.isActive ? `${style.link} ${style.active}` : style.link}>Настройки</NavLink>
                   </li>
               </ul>
+              <div className={style.friends}>
+                  <h4 className={style.title}>Друзья:</h4>
+                  <ul className={style.friends_list}>
+                      {friends}
+                      {/*<li className={style.friends_item}>
+                          <img src={avatar} alt="ava"/>
+                          <h6 className={style.name}>Игорь</h6>
+                      </li>
+                      <li className={style.friends_item}>
+                          <img src={avatar} alt="ava"/>
+                          <h6 className={style.name}>Елена</h6>
+                      </li>
+                      <li className={style.friends_item}>
+                          <img src={avatar} alt="ava"/>
+                          <h6 className={style.name}>Ольга</h6>
+                      </li>
+                      <li className={style.friends_item}>
+                          <img src={avatar} alt="ava"/>
+                          <h6 className={style.name}>Ольга</h6>
+                      </li>*/}
+                  </ul>
+              </div>
           </nav>
       </aside>
   );

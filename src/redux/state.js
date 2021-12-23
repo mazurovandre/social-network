@@ -1,3 +1,5 @@
+import avatar from '../images/avatar.jpg'
+
 const state = {
     profilePage: {
         personInfo: {
@@ -29,6 +31,14 @@ const state = {
             {id: 2, text: 'Привет)', isOutcome: true},
             {id: 3, text: 'Как дела?', isOutcome: false},
             {id: 4, text: 'Норм', isOutcome: true}
+        ]
+    },
+    sidebar: {
+        friends: [
+            {id: 1, name: 'Игорь', avatar: avatar},
+            {id: 2, name: 'Ольга', avatar: avatar},
+            {id: 3, name: 'Елена', avatar: avatar},
+            {id: 4, name: 'Михаил', avatar: avatar}
         ]
     }
 }
