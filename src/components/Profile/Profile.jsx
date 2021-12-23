@@ -4,10 +4,11 @@ import Info from "./Info/Info";
 import Posts from "./Posts/Posts";
 
 const Profile = (props) => {
+
     return (
         <div>
-            <Info name={props.info.name} birthDate={props.info.birthDate} city={props.info.city} education={props.info.education}/>
-            <Posts posts={props.posts}/>
+            <Info state={props.state.personInfo}/>
+            <Posts state={props.state.postsData}/>
         </div>
     );
 }

@@ -3,7 +3,7 @@ import style from './Posts.module.sass';
 import Post from "./Post/Post";
 
 const Posts = (props) => {
-    const postsData = props.posts;
+    const messages = props.state.map(state => <Post key={state.id} state={state}/>);
     return (
         <div className={style.posts}>
             <form className={style.form}>
@@ -12,14 +12,16 @@ const Posts = (props) => {
                 <button>Отправить</button>
             </form>
             <ul className={style.list}>
-                <Post message={postsData[0].message} likesCount={postsData[0].likesCount}/>
-                <Post message={postsData[1].message} likesCount={postsData[1].likesCount}/>
-                <Post message={postsData[2].message} likesCount={postsData[2].likesCount}/>
-                <Post message={postsData[3].message} likesCount={postsData[3].likesCount}/>
-                <Post message={postsData[4].message} likesCount={postsData[4].likesCount}/>
+                {messages}
             </ul>
         </div>
     );
 }
 
 export default Posts;
+
+    /*<Post message={postsData[0].message} likesCount={postsData[0].likesCount}/>
+    <Post message={postsData[1].message} likesCount={postsData[1].likesCount}/>
+    <Post message={postsData[2].message} likesCount={postsData[2].likesCount}/>
+    <Post message={postsData[3].message} likesCount={postsData[3].likesCount}/>
+    <Post message={postsData[4].message} likesCount={postsData[4].likesCount}/>*/
