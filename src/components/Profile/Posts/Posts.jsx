@@ -4,12 +4,26 @@ import Post from "./Post/Post";
 
 const Posts = (props) => {
     const messages = props.state.map(state => <Post key={state.id} state={state}/>);
+    const newPostElement = React.createRef();
+
+    const addPost = () => {
+        props.addPost();
+    };
+
+    const onPostChange = () => {
+        const text = newPostElement.current.value;
+        props.onPostChange(text);
+    }
+
     return (
         <div className={style.posts}>
-            <form className={style.form}>
-                <h5 className={style.title}>Мои посты</h5>
-                <textarea name="form" id="form" cols="30" rows="10" placeholder="Напишите свой пост"/>
-                <button>Отправить</button>
+            <form className={style.form} onSubmit={event => {
+                event.preventDefault();
+                addPost();
+            }}>
+                <h5 className={style.title}>Мои посты:</h5>
+                <textarea ref={newPostElement} name="form" id="form" cols="30" rows="10" placeholder="Напишите свой пост" value={props.newPostText} onChange={onPostChange}/>
+                <button type='submit'>Отправить</button>
             </form>
             <ul className={style.list}>
                 {messages}
@@ -19,9 +33,3 @@ const Posts = (props) => {
 }
 
 export default Posts;
-
-    /*<Post message={postsData[0].message} likesCount={postsData[0].likesCount}/>
-    <Post message={postsData[1].message} likesCount={postsData[1].likesCount}/>
-    <Post message={postsData[2].message} likesCount={postsData[2].likesCount}/>
-    <Post message={postsData[3].message} likesCount={postsData[3].likesCount}/>
-    <Post message={postsData[4].message} likesCount={postsData[4].likesCount}/>*/

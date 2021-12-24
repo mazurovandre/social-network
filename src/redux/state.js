@@ -1,6 +1,7 @@
-import avatar from '../images/avatar.jpg'
+import avatar from '../images/avatar.jpg';
+import {rerenderEntireTree} from "../render";
 
-const state = {
+let state = {
     profilePage: {
         personInfo: {
             name: 'Мазуров Андрей',
@@ -14,7 +15,8 @@ const state = {
             {id: 3, message: 'To go over everything', likesCount: 532},
             {id: 4, message: 'They say that time\'s supposed to heal ya', likesCount: 251},
             {id: 5, message: 'But I ain\'t done much healing', likesCount: 252}
-        ]
+        ],
+        newPostText: ''
     },
     dialogsPage: {
         dialogsData: [
@@ -31,7 +33,8 @@ const state = {
             {id: 2, text: 'Привет)', isOutcome: true},
             {id: 3, text: 'Как дела?', isOutcome: false},
             {id: 4, text: 'Норм', isOutcome: true}
-        ]
+        ],
+        messageText: ''
     },
     sidebar: {
         friends: [
@@ -41,6 +44,36 @@ const state = {
             {id: 4, name: 'Михаил', avatar: avatar}
         ]
     }
+}
+
+export const addPost = () => {
+    let newPost = {};
+    newPost.id = state.profilePage.postsData.length + 1;
+    newPost.message = state.profilePage.newPostText;
+    newPost.likesCount = 0;
+    state.profilePage.postsData.push(newPost);
+    state.profilePage.newPostText = '';
+    rerenderEntireTree(state);
+}
+
+export const onPostChange = (newText) => {
+    state.profilePage.newPostText = newText;
+    rerenderEntireTree(state);
+}
+
+export const messageTextChange = (newText) => {
+    state.dialogsPage.messageText = newText;
+    rerenderEntireTree(state);
+}
+
+export const sentMessage = () => {
+    let newMessage = {};
+    newMessage.id = state.dialogsPage.dialogsMessages.length + 1;
+    newMessage. text = state.dialogsPage.messageText;
+    newMessage.isOutcome = true;
+    state.dialogsPage.dialogsMessages.push(newMessage);
+    state.dialogsPage.messageText = '';
+    rerenderEntireTree(state);
 }
 
 export default state;
