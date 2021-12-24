@@ -1,5 +1,9 @@
 import avatar from '../images/avatar.jpg';
-import {rerenderEntireTree} from "../render";
+// import {rerenderEntireTree} from "../render";
+// import {observe} from "web-vitals/dist/modules/lib/observe";
+// import {rerenderEntireTree} from "../render";
+
+let rerenderEntireTree = () => {};
 
 let state = {
     profilePage: {
@@ -75,5 +79,9 @@ export const sentMessage = () => {
     state.dialogsPage.messageText = '';
     rerenderEntireTree(state);
 }
+
+export const subscribe = (observer) => {
+    rerenderEntireTree = observer
+};
 
 export default state;
