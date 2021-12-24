@@ -4,12 +4,16 @@ import {NavLink} from "react-router-dom";
 /*import avatar from '../../images/avatar.jpg'*/
 
 const Sidebar = (props) => {
-    const friends = props.state.friends.map(friend => {
+    // debugger;
+
+    const friends = props.state.sidebar.friends.map(friend => {
         return ( <li className={style.friends_item} key={friend.id}>
             <img src={friend.avatar} alt="ava" width='60' height='60'/>
             <h6 className={style.name}>{friend.name}</h6>
         </li>)
     });
+
+    // console.log({friends})
 
   return (
       <aside className={style.sidebar}>

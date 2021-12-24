@@ -8,11 +8,11 @@ const MessageInput = (props) => {
 
     const changeMessageArea = () => {
         let text = messageArea.current.value;
-        props.messageTextChange(text);
+        props.store.messageTextChange(text);
     };
 
     const sentMessage = () => {
-        props.sentMessage();
+        props.store.sentMessage();
     };
 
     return (
@@ -20,7 +20,7 @@ const MessageInput = (props) => {
             event.preventDefault();
             sentMessage();
         }}>
-            <input type='text' ref={messageArea} className={style.textarea} onChange={changeMessageArea} value={props.messageText}/>
+            <input type='text' ref={messageArea} className={style.textarea} onChange={changeMessageArea} value={props.state.dialogsPage.messageText}/>
             <button type='submit' className={style.btn}>Отправить</button>
         </form>
     )

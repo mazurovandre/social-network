@@ -10,18 +10,17 @@ import Dialogs from "./components/Dialogs/Dialogs";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
-// import {messageTextChange, onPostChange, sentMessage} from "./redux/state";
 
 const App = (props) => {
     return (
         <BrowserRouter>
             <div className='app-wrapper'>
                 <Header/>
-                <Sidebar state={props.appState.sidebar}/>
+                <Sidebar state={props.state}/>
                 <main className="main-content">
                     <Routes>
-                        <Route path="/" element={<Profile state={props.appState.profilePage} addPost={props.addPost}  onPostChange={props.onPostChange}/>}/>
-                        <Route path="/dialogs" element={<Dialogs state={props.appState.dialogsPage} messageTextChange={props.messageTextChange} sentMessage={props.sentMessage}/>}/>
+                        <Route path="/" element={<Profile state={props.state} store={props.store}/>}/>
+                        <Route path="/dialogs" element={<Dialogs state={props.state} store={props.store}/>}/>
                         <Route path="/news" element={<News/>}/>
                         <Route path="/music" element={<Music/>}/>
                         <Route path="/settings" element={<Settings/>}/>

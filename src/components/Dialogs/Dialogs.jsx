@@ -7,8 +7,8 @@ import MessageInput from "./MessageInput/MessageInput";
 // import App from "../../App";
 
 const Dialogs = (props) => {
-    const dialogs = props.state.dialogsData.map(person => <DialogName key={person.id} name={person.name} id={person.id.toString()}/>);
-    const messages = props.state.dialogsMessages.map(message => <Message key={message.id} message={message.text} isOutcome={message.isOutcome}/>);
+    const dialogs = props.state.dialogsPage.dialogsData.map(person => <DialogName key={person.id} name={person.name} id={person.id.toString()}/>);
+    const messages = props.state.dialogsPage.dialogsMessages.map(message => <Message key={message.id} message={message.text} isOutcome={message.isOutcome}/>);
 
     return (
         <div className={style.dialogs}>
@@ -27,9 +27,8 @@ const Dialogs = (props) => {
                         </ul>
                     </div>
                     <div className={style.input}>
-                        <MessageInput messageText={props.state.messageText} messageTextChange={props.messageTextChange} sentMessage={props.sentMessage}/>
+                        <MessageInput state={props.state} store={props.store}/>
                     </div>
-
                 </div>
             </div>
         </div>

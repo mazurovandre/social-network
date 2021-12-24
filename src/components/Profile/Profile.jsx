@@ -9,8 +9,8 @@ const Profile = (props) => {
 
     return (
         <div>
-            <Info state={props.state.personInfo}/>
-            <Posts state={props.state.postsData} addPost={props.addPost} newPostText={props.state.newPostText} onPostChange={props.onPostChange}/>
+            <Info state={props.state}/>
+            <Posts state={props.state} store={props.store}/>
         </div>
     );
 }
