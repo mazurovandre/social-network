@@ -1,4 +1,7 @@
 import avatar from '../images/avatar.jpg';
+import profileReducer from "./profileReducer";
+import dialogsReducer from "./dialogsReducer";
+import sidebarReducer from "./sidebarReducer";
 
 const ADD_POST = 'ADD-POST';
 const ON_POST_CHANGE = 'ON-POST-CHANGE';
@@ -59,29 +62,11 @@ let store = {
     },
 
     dispatch(action) {
-        if (action.type === ADD_POST) {
-            let newPost = {};
-            newPost.id = this._state.profilePage.postsData.length + 1;
-            newPost.message = this._state.profilePage.newPostText;
-            newPost.likesCount = 0;
-            this._state.profilePage.postsData.push(newPost);
-            this._state.profilePage.newPostText = '';
-            this._rerenderDOM(this._state);
-        } else if (action.type === ON_POST_CHANGE) {
-            this._state.profilePage.newPostText = action.newText;
-            this._rerenderDOM(this._state);
-        } else if (action.type === CHANGE_MESSAGE_AREA) {
-            this._state.dialogsPage.messageText = action.newText;
-            this._rerenderDOM(this._state);
-        } else if (action.type === SENT_MESSAGE) {
-            let newMessage = {};
-            newMessage.id = this._state.dialogsPage.dialogsMessages.length + 1;
-            newMessage. text = this._state.dialogsPage.messageText;
-            newMessage.isOutcome = true;
-            this._state.dialogsPage.dialogsMessages.push(newMessage);
-            this._state.dialogsPage.messageText = '';
-            this._rerenderDOM(this._state);
-        }
+        this._state.profilePage = profileReducer(this._state.profilePage, action);
+        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action);
+        this._state.sidebar = sidebarReducer(this._state.sidebar, action);
+
+        this._rerenderDOM(this._state);
     }
 };
 
