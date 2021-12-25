@@ -19,8 +19,8 @@ const App = (props) => {
                 <Sidebar state={props.state}/>
                 <main className="main-content">
                     <Routes>
-                        <Route path="/" element={<Profile state={props.state} store={props.store}/>}/>
-                        <Route path="/dialogs" element={<Dialogs state={props.state} store={props.store}/>}/>
+                        <Route path="/" element={<Profile state={props.state} dispatch={props.dispatch}/>}/>
+                        <Route path="/dialogs" element={<Dialogs state={props.state} dispatch={props.dispatch}/>}/>
                         <Route path="/news" element={<News/>}/>
                         <Route path="/music" element={<Music/>}/>
                         <Route path="/settings" element={<Settings/>}/>

@@ -27,7 +27,7 @@ const Dialogs = (props) => {
                         </ul>
                     </div>
                     <div className={style.input}>
-                        <MessageInput state={props.state} store={props.store}/>
+                        <MessageInput state={props.state} dispatch={props.dispatch}/>
                     </div>
                 </div>
             </div>

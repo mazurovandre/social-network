@@ -1,18 +1,16 @@
 import React from "react";
 import style from './MessageInput.module.sass';
-// import {messageTextChange, sentMessage} from "../../../redux/state";
-// import App from "../../../App";
 
 const MessageInput = (props) => {
     const messageArea = React.createRef();
 
     const changeMessageArea = () => {
         let text = messageArea.current.value;
-        props.store.messageTextChange(text);
+        props.dispatch({type: 'CHANGE-MESSAGE-AREA', newText: text});
     };
 
     const sentMessage = () => {
-        props.store.sentMessage();
+        props.dispatch({type: 'SENT-MESSAGE'});
     };
 
     return (

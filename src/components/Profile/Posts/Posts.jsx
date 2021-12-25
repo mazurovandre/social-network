@@ -3,16 +3,18 @@ import style from './Posts.module.sass';
 import Post from "./Post/Post";
 
 const Posts = (props) => {
+    console.log(props)
     const posts = props.state.profilePage.postsData.map(state => <Post key={state.id} state={state}/>);
     const newPostElement = React.createRef();
 
     const addPost = () => {
-        props.store.addPost();
+        props.dispatch({type: 'ADD-POST'});
     };
 
     const onPostChange = () => {
         const text = newPostElement.current.value;
-        props.store.onPostChange(text);
+        // props.store.onPostChange(text);
+        props.dispatch({type: 'ON-POST-CHANGE', newText: text});
     }
 
     return (

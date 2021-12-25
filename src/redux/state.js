@@ -2,7 +2,7 @@ import avatar from '../images/avatar.jpg';
 
 let store = {
     _rerenderDOM() {},
-    state: {
+    _state: {
         profilePage: {
             personInfo: {
                 name: 'Мазуров Андрей',
@@ -46,35 +46,41 @@ let store = {
             ]
         }
     },
-    addPost() {
-        let newPost = {};
-        newPost.id = this.state.profilePage.postsData.length + 1;
-        newPost.message = this.state.profilePage.newPostText;
-        newPost.likesCount = 0;
-        this.state.profilePage.postsData.push(newPost);
-        this.state.profilePage.newPostText = '';
-        this._rerenderDOM(this.state);
-    },
-    onPostChange(newText) {
-        this.state.profilePage.newPostText = newText;
-        this._rerenderDOM(this.state);
-    },
-    messageTextChange(newText) {
-        this.state.dialogsPage.messageText = newText;
-        this._rerenderDOM(this.state);
-    },
-    sentMessage() {
-        let newMessage = {};
-        newMessage.id = this.state.dialogsPage.dialogsMessages.length + 1;
-        newMessage. text = this.state.dialogsPage.messageText;
-        newMessage.isOutcome = true;
-        this.state.dialogsPage.dialogsMessages.push(newMessage);
-        this.state.dialogsPage.messageText = '';
-        this._rerenderDOM(this.state);
+    getState() {
+        return this._state;
     },
     subscribe(observer) {
         this._rerenderDOM = observer
+    },
+
+    dispatch(action) {
+        if (action.type === 'ADD-POST') {
+            let newPost = {};
+            newPost.id = this._state.profilePage.postsData.length + 1;
+            newPost.message = this._state.profilePage.newPostText;
+            newPost.likesCount = 0;
+            this._state.profilePage.postsData.push(newPost);
+            this._state.profilePage.newPostText = '';
+            this._rerenderDOM(this._state);
+        } else if (action.type === 'ON-POST-CHANGE') {
+            console.log(this)
+            this._state.profilePage.newPostText = action.newText;
+            this._rerenderDOM(this._state);
+        } else if (action.type === 'CHANGE-MESSAGE-AREA') {
+            this._state.dialogsPage.messageText = action.newText;
+            this._rerenderDOM(this._state);
+        } else if (action.type === 'SENT-MESSAGE') {
+            let newMessage = {};
+            newMessage.id = this._state.dialogsPage.dialogsMessages.length + 1;
+            newMessage. text = this._state.dialogsPage.messageText;
+            newMessage.isOutcome = true;
+            this._state.dialogsPage.dialogsMessages.push(newMessage);
+            this._state.dialogsPage.messageText = '';
+            this._rerenderDOM(this._state);
+        }
     }
 };
+
+window.store = store;
 
 export default store;
