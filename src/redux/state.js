@@ -1,5 +1,10 @@
 import avatar from '../images/avatar.jpg';
 
+const ADD_POST = 'ADD-POST';
+const ON_POST_CHANGE = 'ON-POST-CHANGE';
+const CHANGE_MESSAGE_AREA = 'CHANGE-MESSAGE-AREA';
+const SENT_MESSAGE = 'SENT-MESSAGE';
+
 let store = {
     _rerenderDOM() {},
     _state: {
@@ -54,7 +59,7 @@ let store = {
     },
 
     dispatch(action) {
-        if (action.type === 'ADD-POST') {
+        if (action.type === ADD_POST) {
             let newPost = {};
             newPost.id = this._state.profilePage.postsData.length + 1;
             newPost.message = this._state.profilePage.newPostText;
@@ -62,14 +67,13 @@ let store = {
             this._state.profilePage.postsData.push(newPost);
             this._state.profilePage.newPostText = '';
             this._rerenderDOM(this._state);
-        } else if (action.type === 'ON-POST-CHANGE') {
-            console.log(this)
+        } else if (action.type === ON_POST_CHANGE) {
             this._state.profilePage.newPostText = action.newText;
             this._rerenderDOM(this._state);
-        } else if (action.type === 'CHANGE-MESSAGE-AREA') {
+        } else if (action.type === CHANGE_MESSAGE_AREA) {
             this._state.dialogsPage.messageText = action.newText;
             this._rerenderDOM(this._state);
-        } else if (action.type === 'SENT-MESSAGE') {
+        } else if (action.type === SENT_MESSAGE) {
             let newMessage = {};
             newMessage.id = this._state.dialogsPage.dialogsMessages.length + 1;
             newMessage. text = this._state.dialogsPage.messageText;
@@ -81,6 +85,9 @@ let store = {
     }
 };
 
-window.store = store;
+export const addPostActionCreator = () => ({type: ADD_POST});
+export const onPostChangeActionCreator = (text) => ({type: ON_POST_CHANGE, newText: text});
+export const changeMessageAreaActionCreator = (text) => ({type: CHANGE_MESSAGE_AREA, newText: text});
+export const sentMessageActionCreator = () => ({type: SENT_MESSAGE});
 
 export default store;

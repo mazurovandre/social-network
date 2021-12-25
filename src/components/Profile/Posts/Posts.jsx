@@ -1,20 +1,19 @@
 import React from "react";
 import style from './Posts.module.sass';
 import Post from "./Post/Post";
+import {addPostActionCreator, onPostChangeActionCreator} from "../../../redux/state";
 
 const Posts = (props) => {
-    console.log(props)
     const posts = props.state.profilePage.postsData.map(state => <Post key={state.id} state={state}/>);
     const newPostElement = React.createRef();
 
     const addPost = () => {
-        props.dispatch({type: 'ADD-POST'});
+        props.dispatch(addPostActionCreator());
     };
 
     const onPostChange = () => {
         const text = newPostElement.current.value;
-        // props.store.onPostChange(text);
-        props.dispatch({type: 'ON-POST-CHANGE', newText: text});
+        props.dispatch(onPostChangeActionCreator(text));
     }
 
     return (
