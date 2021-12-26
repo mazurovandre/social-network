@@ -1,16 +1,13 @@
 import React from "react";
-// import style from './Profile.module.sass';
 import Info from "./Info/Info";
-import Posts from "./Posts/Posts";
-// import {onPostChange} from "../../redux/state";
-// import App from "../../App";
+import PostsContainer from "./Posts/PostsContainer";
 
 const Profile = (props) => {
 
     return (
         <div>
-            <Info state={props.state}/>
-            <Posts state={props.state} dispatch={props.dispatch}/>
+            <Info state={props.store.getState().profilePage.personInfo}/>
+            <PostsContainer store={props.store}/>
         </div>
     );
 }

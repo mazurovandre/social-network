@@ -1,6 +1,5 @@
 import React from "react";
 import style from './MessageInput.module.sass';
-import {changeMessageAreaActionCreator, sentMessageActionCreator} from "../../../redux/dialogsReducer";
 
 
 const MessageInput = (props) => {
@@ -8,11 +7,11 @@ const MessageInput = (props) => {
 
     const changeMessageArea = () => {
         let text = messageArea.current.value;
-        props.dispatch(changeMessageAreaActionCreator(text));
+        props.changeMessageArea(text);
     };
 
     const sentMessage = () => {
-        props.dispatch(sentMessageActionCreator());
+        props.sentMessage();
     };
 
     return (
@@ -20,7 +19,7 @@ const MessageInput = (props) => {
             event.preventDefault();
             sentMessage();
         }}>
-            <input type='text' ref={messageArea} className={style.textarea} onChange={changeMessageArea} value={props.state.dialogsPage.messageText}/>
+            <input type='text' ref={messageArea} className={style.textarea} onChange={changeMessageArea} value={props.state.messageText}/>
             <button type='submit' className={style.btn}>Отправить</button>
         </form>
     )
