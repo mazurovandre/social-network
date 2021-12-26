@@ -1,7 +1,7 @@
 import React from "react";
 import style from './Posts.module.sass';
 import Post from "./Post/Post";
-import {addPostActionCreator, onPostChangeActionCreator} from "../../../redux/state";
+import {addPostActionCreator, onPostChangeActionCreator} from "../../../redux/profileReducer";
 
 const Posts = (props) => {
     const posts = props.state.profilePage.postsData.map(state => <Post key={state.id} state={state}/>);

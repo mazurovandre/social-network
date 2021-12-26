@@ -1,6 +1,6 @@
 import React from "react";
 import style from './MessageInput.module.sass';
-import {changeMessageAreaActionCreator, sentMessageActionCreator} from "../../../redux/state";
+import {changeMessageAreaActionCreator, sentMessageActionCreator} from "../../../redux/dialogsReducer";
 
 
 const MessageInput = (props) => {

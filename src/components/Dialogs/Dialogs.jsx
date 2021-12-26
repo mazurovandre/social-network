@@ -3,7 +3,7 @@ import style from './Dialogs.module.sass';
 import DialogName from "./DialogName/DialogName";
 import Message from "./Message/Message";
 import MessageInput from "./MessageInput/MessageInput";
-// import {messageTextChange, sentMessage} from "../../redux/state";
+// import {messageTextChange, sentMessage} from "../../redux/";
 // import App from "../../App";
 
 const Dialogs = (props) => {
