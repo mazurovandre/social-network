@@ -3,7 +3,10 @@ import style from './Sidebar.module.sass';
 import {NavLink} from "react-router-dom";
 
 const Sidebar = (props) => {
-    const friends = props.state.friends.map(friend => {
+
+    // console.log(props.friends.friends);
+    // debugger;
+    const friends = props.friends.map(friend => {
         return ( <li className={style.friends_item} key={friend.id}>
             <img src={friend.avatar} alt="ava" width='60' height='60'/>
             <h6 className={style.name}>{friend.name}</h6>

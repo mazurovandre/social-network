@@ -1,13 +1,13 @@
 import React from "react";
-import Info from "./Info/Info";
 import PostsContainer from "./Posts/PostsContainer";
+import InfoContainer from "./Info/InfoContainer";
 
-const Profile = (props) => {
+const Profile = () => {
 
     return (
         <div>
-            <Info state={props.store.getState().profilePage.personInfo}/>
-            <PostsContainer store={props.store}/>
+            <InfoContainer />
+            <PostsContainer/>
         </div>
     );
 }

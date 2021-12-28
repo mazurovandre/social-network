@@ -14,10 +14,10 @@ const Info = (props) => {
                     <img src={avatar} alt="avatar"/>
                 </div>
                 <div className={style.about}>
-                    <h2 className={style.title}>{props.state.name}</h2>
-                    <h6 className={style.text}>Дата рождения: {props.state.birthDate}</h6>
-                    <h6 className={style.text}>Город: {props.state.city}</h6>
-                    <h6 className={style.text}>Образование: {props.education}</h6>
+                    <h2 className={style.title}>{props.personInfo.name}</h2>
+                    <h6 className={style.text}>Дата рождения: {props.personInfo.birthDate}</h6>
+                    <h6 className={style.text}>Город: {props.personInfo.city}</h6>
+                    <h6 className={style.text}>Образование: {props.personInfo.education}</h6>
                 </div>
             </div>
         </div>

@@ -1,19 +1,27 @@
 import React from "react";
 import {changeMessageAreaActionCreator, sentMessageActionCreator} from "../../../redux/dialogsReducer";
 import MessageInput from "./MessageInput";
+import {connect} from "react-redux";
 
 
-const MessageInputContainer = (props) => {
-
-    const changeMessageArea = (text) => {
-        props.store.dispatch(changeMessageAreaActionCreator(text));
-    };
-
-    const sentMessage = () => {
-        props.store.dispatch(sentMessageActionCreator());
-    };
-
-    return <MessageInput state={props.store.getState().dialogsPage} changeMessageArea={changeMessageArea} sentMessage={sentMessage}/>
+let mapStateToProps = (state) => {
+    return {
+        dialogsPage: state.dialogsPage
+    }
 }
+
+let mapDispatchToProps = (dispatch) => {
+    return {
+        changeMessageArea: (text) => {
+            let action = changeMessageAreaActionCreator(text);
+            dispatch(action)
+        },
+        sentMessage: () => {
+            dispatch(sentMessageActionCreator());
+        }
+    }
+}
+
+const MessageInputContainer = connect(mapStateToProps, mapDispatchToProps)(MessageInput)
 
 export default MessageInputContainer;

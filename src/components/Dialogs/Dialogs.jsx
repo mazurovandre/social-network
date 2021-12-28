@@ -5,8 +5,8 @@ import Message from "./Message/Message";
 import MessageInputContainer from "./MessageInput/MessageInputContainer";
 
 const Dialogs = (props) => {
-    const dialogs = props.state.dialogsData.map(person => <DialogName key={person.id} name={person.name} id={person.id.toString()}/>);
-    const messages = props.state.dialogsMessages.map(message => <Message key={message.id} message={message.text} isOutcome={message.isOutcome}/>);
+    const dialogs = props.dialogsData.map(person => <DialogName key={person.id} name={person.name} id={person.id.toString()}/>);
+    const messages = props.dialogsMessages.map(message => <Message key={message.id} message={message.text} isOutcome={message.isOutcome}/>);
 
     return (
         <div className={style.dialogs}>

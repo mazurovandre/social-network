@@ -3,6 +3,8 @@ import style from './MessageInput.module.sass';
 
 
 const MessageInput = (props) => {
+
+    props.changeMessageArea('svas');
     const messageArea = React.createRef();
 
     const changeMessageArea = () => {
@@ -19,7 +21,7 @@ const MessageInput = (props) => {
             event.preventDefault();
             sentMessage();
         }}>
-            <input type='text' ref={messageArea} className={style.textarea} onChange={changeMessageArea} value={props.state.messageText}/>
+            <input type='text' ref={messageArea} className={style.textarea} onChange={changeMessageArea} value={props.messageText}/>
             <button type='submit' className={style.btn}>Отправить</button>
         </form>
     )
