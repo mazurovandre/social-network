@@ -3,8 +3,6 @@ import style from './MessageInput.module.sass';
 
 
 const MessageInput = (props) => {
-
-    props.changeMessageArea('svas');
     const messageArea = React.createRef();
 
     const changeMessageArea = () => {

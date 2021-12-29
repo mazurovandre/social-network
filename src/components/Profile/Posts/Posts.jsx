@@ -3,8 +3,10 @@ import style from './Posts.module.sass';
 import Post from "./Post/Post";
 
 const Posts = (props) => {
+    // console.log(props.postsData)
     const posts = props.postsData.map(state => <Post key={state.id} state={state}/>);
     const newPostElement = React.createRef();
+
 
     const addPost = () => {
         props.addPost();

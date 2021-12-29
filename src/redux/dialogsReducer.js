@@ -23,18 +23,27 @@ let initialState = {
 const dialogsReducer = (state = initialState, action) => {
     switch (action.type) {
         case CHANGE_MESSAGE_AREA:
-            state.messageText = action.newText;
-            break;
+            return {
+                ...state,
+                messageText: action.newText
+            }
         case SENT_MESSAGE:
-            let newMessage = {};
-            newMessage.id = state.dialogsMessages.length + 1;
-            newMessage.text = state.messageText;
-            newMessage.isOutcome = true;
-            state.dialogsMessages.push(newMessage);
-            state.messageText = '';
-            break;
+            const newMessage = {
+                id: state.dialogsMessages.length + 1,
+                text: state.messageText,
+                isOutcome: true
+            };
+            if (newMessage.text) {
+                return {
+                    ...state,
+                    messageText: '',
+                    dialogsMessages: [...state.dialogsMessages, newMessage]
+                }
+            }
+            return state;
+        default:
+            return state;
     }
-    return state;
 }
 export const changeMessageAreaActionCreator = (text) => ({type: CHANGE_MESSAGE_AREA, newText: text});
 export const sentMessageActionCreator = () => ({type: SENT_MESSAGE});
