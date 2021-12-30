@@ -8,9 +8,9 @@ let initialState = {
 const usersReducer = (state = initialState, action) => {
     switch (action.type) {
         case TOGGLE_FOLLOW:
-            const newState = {users: []};
-            state.users.map(user => newState.users.push({...user}));
-            newState.users[action.id - 1].isFollowed = !newState.users[action.id - 1].isFollowed;
+            const newState = {users: [...state.users]};
+            const targetUser = newState.users.find(user => user.id === action.id);
+            targetUser.followed = !targetUser.followed
             return newState;
         case SET_USERS:
             return {
