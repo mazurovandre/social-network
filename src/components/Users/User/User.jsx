@@ -22,8 +22,8 @@ const User = (props) => {
                 <h4 className={style.status}>{props.info.status}</h4>
             </div>
             <div className={style.right}>
-                <h5 className={style.country}>props.info.country</h5>
-                <h5 className={style.city}>props.info.city</h5>
+                <h5 className={style.country}>{props.info.country ? props.info.country : 'Страна'}</h5>
+                <h5 className={style.city}>{props.info.city ? props.info.city : 'Город'}</h5>
             </div>
         </li>
     );
