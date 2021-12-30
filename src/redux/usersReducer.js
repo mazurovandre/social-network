@@ -14,12 +14,13 @@ const usersReducer = (state = initialState, action) => {
             return newState;
         case SET_USERS:
             return {
-                users: [...state.users, ...action.users]
+                users: [...action.users]
             }
         default:
             return state;
     }
 }
+
 export const toggleFollowActionCreator = (id) => ({type: TOGGLE_FOLLOW, id: id});
 export const setUsersActionCreator = (users) => ({type: SET_USERS, users: users});
 export default usersReducer;
