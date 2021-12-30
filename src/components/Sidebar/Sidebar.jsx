@@ -29,9 +29,12 @@ const Sidebar = (props) => {
                   <li className={style.item}>
                       <NavLink to="/settings" className={link => link.isActive ? `${style.link} ${style.active}` : style.link}>Настройки</NavLink>
                   </li>
+                  <li className={style.item}>
+                      <NavLink to="/users" className={link => link.isActive ? `${style.link} ${style.active}` : style.link}>Найти людей</NavLink>
+                  </li>
               </ul>
               <div className={style.friends}>
-                  <h4 className={style.title}>Друзья:</h4>
+                  <h4 className={style.title}>Друзья онлайн:</h4>
                   <ul className={style.friends_list}>
                       {friends}
                   </ul>
@@ -42,3 +45,4 @@ const Sidebar = (props) => {
 }
 
 export default Sidebar;
+
