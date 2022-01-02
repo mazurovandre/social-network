@@ -16,7 +16,6 @@ const User = (props) => {
             </div>
             <div className={style.center}>
                 <div className={style.name}>
-                    {/*<h3 className={style.firstName}>{props.info.firstName}</h3>*/}
                     <h3 className={style.lastName}>{props.info.name}</h3>
                 </div>
                 <h4 className={style.status}>{props.info.status}</h4>

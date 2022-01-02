@@ -1,14 +1,63 @@
 import React from "react";
 import {connect} from "react-redux";
-import {changeCurrentPageAC, setTotalCountAC, setUsersAC, toggleFollowAC} from "../../redux/usersReducer";
+import {
+    changeCurrentPageAC,
+    setTotalCountAC,
+    setUsersAC,
+    toggleFetchingAC,
+    toggleFollowAC
+} from "../../redux/usersReducer";
 import Users from "./Users";
+import axios from "axios";
+import Preloader from "../common/Preloader/Preloader";
+
+// Users API: https://social-network.samuraijs.com/
+// API Doc: https://social-network.samuraijs.com/docs#users_get
+
+class UsersContainer extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
+    componentDidMount() {
+        this.props.toggleFetching(true);
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}`).then(response => {
+            this.props.toggleFetching(false);
+            this.props.setUsers(response.data.items);
+            this.props.setTotalCount(response.data.totalCount);
+        })
+    }
+
+    changeCurrentPage = (currentPage) => {
+        this.props.changeCurrentPage(currentPage);
+        this.props.toggleFetching(true);
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${currentPage}`).then(response => {
+            this.props.toggleFetching(false);
+            this.props.setUsers(response.data.items);
+        })
+    }
+
+    render() {
+        return <>
+            <Users totalCount={this.props.totalCount}
+                   pageSize={this.props.pageSize}
+                   currentPage={this.props.currentPage}
+                   users={this.props.users}
+                   toggleFollow={this.props.toggleFollow}
+                   changeCurrentPage={this.changeCurrentPage}/>
+            {this.props.isFetching && <Preloader />}
+        </>
+    }
+}
+
 
 const mapStateToProps = (state) => {
     return {
         users: state.usersPage.users,
         totalCount: state.usersPage.totalCount,
         pageSize: state.usersPage.pageSize,
-        currentPage: state.usersPage.currentPage
+        currentPage: state.usersPage.currentPage,
+        isFetching: state.usersPage.isFetching
     }
 }
 
@@ -25,10 +74,11 @@ const mapDispatchToProps = (dispatch) => {
         },
         changeCurrentPage: (currentPage) => {
             dispatch(changeCurrentPageAC(currentPage));
+        },
+        toggleFetching: (isFetching) => {
+            dispatch(toggleFetchingAC(isFetching));
         }
     }
 }
 
-const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(Users);
-
-export default UsersContainer;
+export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer);
