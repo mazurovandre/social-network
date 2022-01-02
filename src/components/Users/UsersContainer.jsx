@@ -1,11 +1,11 @@
 import React from "react";
 import {connect} from "react-redux";
 import {
-    changeCurrentPageAC,
-    setTotalCountAC,
-    setUsersAC,
-    toggleFetchingAC,
-    toggleFollowAC
+    changeCurrentPage,
+    setTotalCount,
+    setUsers,
+    toggleFetching,
+    toggleFollow
 } from "../../redux/usersReducer";
 import Users from "./Users";
 import axios from "axios";
@@ -61,24 +61,26 @@ const mapStateToProps = (state) => {
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        toggleFollow: (id) => {
-            dispatch(toggleFollowAC(id));
-        },
-        setUsers: (users) => {
-            dispatch(setUsersAC(users));
-        },
-        setTotalCount: (totalCount) => {
-            dispatch(setTotalCountAC(totalCount));
-        },
-        changeCurrentPage: (currentPage) => {
-            dispatch(changeCurrentPageAC(currentPage));
-        },
-        toggleFetching: (isFetching) => {
-            dispatch(toggleFetchingAC(isFetching));
-        }
-    }
-}
+// const mapDispatchToProps = (dispatch) => {
+//     return {
+//         toggleFollow: (id) => {
+//             dispatch(toggleFollowAC(id));
+//         },
+//         setUsers: (users) => {
+//             dispatch(setUsersAC(users));
+//         },
+//         setTotalCount: (totalCount) => {
+//             dispatch(setTotalCountAC(totalCount));
+//         },
+//         changeCurrentPage: (currentPage) => {
+//             dispatch(changeCurrentPageAC(currentPage));
+//         },
+//         toggleFetching: (isFetching) => {
+//             dispatch(toggleFetchingAC(isFetching));
+//         }
+//     }
+// }
 
-export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer);
+export default connect(mapStateToProps,
+    {toggleFollow, setUsers, setTotalCount, changeCurrentPage, toggleFetching}
+    )(UsersContainer);

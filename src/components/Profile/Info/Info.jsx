@@ -2,26 +2,32 @@ import React from "react";
 import style from './Info.module.sass';
 import bg from "../../../images/post.jpg"
 import avatar from "../../../images/avatar.jpg"
+import Preloader from "../../common/Preloader/Preloader";
+import Contacts from "./Contacts/Contacts";
 
 const Info = (props) => {
+    if (!props.profile) {
+        return <Preloader />
+    }
+
+    console.log(props)
     return (
-        <div className={style.info}>
-            <div className={style.photo}>
-                <img src={bg} alt="profile-bg"/>
-            </div>
-            <div className={style.description}>
-                <div className={style.avatar}>
-                    <img src={avatar} alt="avatar"/>
+            <div className={style.info}>
+                <div className={style.photo}>
+                    <img src={props.profile.photos.large ? props.profile.photos.large : bg} alt="profile-bg"/>
                 </div>
-                <div className={style.about}>
-                    <h2 className={style.title}>{props.personInfo.name}</h2>
-                    <h6 className={style.text}>Дата рождения: {props.personInfo.birthDate}</h6>
-                    <h6 className={style.text}>Город: {props.personInfo.city}</h6>
-                    <h6 className={style.text}>Образование: {props.personInfo.education}</h6>
+                <div className={style.description}>
+                    <div className={style.avatar}>
+                        <img src={props.profile.photos.small ? props.profile.photos.small : avatar} alt="avatar"/>
+                    </div>
+                    <div className={style.about}>
+                        <h2 className={style.title}>{props.profile.fullName}</h2>
+                        <h6 className={style.text}>{props.profile.aboutMe}</h6>
+                        <Contacts {...props.profile.contacts} />
+                    </div>
                 </div>
             </div>
-        </div>
-        );
+    );
 }
 
 export default Info;

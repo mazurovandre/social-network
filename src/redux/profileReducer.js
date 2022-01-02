@@ -1,13 +1,28 @@
+import bg from '../images/post.jpg';
+import ava from '../images/avatar.jpg';
+
 const ADD_POST = 'ADD-POST';
 const ON_POST_CHANGE = 'ON-POST-CHANGE';
+const SET_USER_PROFILE = 'SET_USER_PROFILE';
+
+export const myProfile = {
+    fullName: 'Мазуров Андрей',
+    aboutMe: 'Статус 3000',
+    lookingForAJob: true,
+    lookingForAJobDescription: 'Да возьмите меня кто-нибудь',
+    photos: {
+        large: bg,
+        small: ava
+    },
+    contacts: {
+        facebook: 'www.facebook.com',
+        vk: 'www.vk.com',
+        github: 'www.github.com',
+        website: 'mazurovandre.github.io',
+    }
+}
 
 let initialState = {
-    personInfo: {
-        name: 'Мазуров Андрей',
-        birthDate: '22 марта 1994 г.',
-        city: 'Санкт-Петербург',
-        education: 'Университет ИТМО'
-    },
     postsData: [
         {id: 1, message: 'Hello, it\'s me', likesCount: 11},
         {id: 2, message: 'I was wondering if after all these years you\'d like to meet', likesCount: 123},
@@ -15,7 +30,8 @@ let initialState = {
         {id: 4, message: 'They say that time\'s supposed to heal ya', likesCount: 251},
         {id: 5, message: 'But I ain\'t done much healing', likesCount: 252}
     ],
-    newPostText: ''
+    newPostText: '',
+    profile: null
 }
 
 const profileReducer = (state = initialState, action) => {
@@ -40,6 +56,11 @@ const profileReducer = (state = initialState, action) => {
                 ...state,
                 newPostText: action.newText
             }
+        case SET_USER_PROFILE:
+            return {
+                ...state,
+                profile: action.profile
+            }
         default:
             return state;
     }
@@ -47,5 +68,6 @@ const profileReducer = (state = initialState, action) => {
 
 export const addPostActionCreator = () => ({type: ADD_POST});
 export const onPostChangeActionCreator = (text) => ({type: ON_POST_CHANGE, newText: text});
+export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile});
 
 export default profileReducer;
