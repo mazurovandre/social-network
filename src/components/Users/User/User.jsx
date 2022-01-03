@@ -2,6 +2,7 @@ import React from "react";
 import style from './User.module.sass';
 import avatar from '../../../images/avatar.jpg'
 import {NavLink} from "react-router-dom";
+import axios from "axios";
 
 const User = (props) => {
 
@@ -15,7 +16,33 @@ const User = (props) => {
                 <NavLink to={`/profile/${props.info.id}`}>
                     <img className={style.avatar} src={props.info.photos.small !== null ? props.info.photos.small : avatar} alt="avatar"/>
                 </NavLink>
-                <button className={style.button} onClick={() => { toggleFollow(props.info.id) }}>{props.info.followed ? 'Отписаться' : 'Подписаться'}</button>
+                <button className={style.button}
+                        onClick={() => {
+                            if (!props.info.followed) {
+                                axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${props.info.id}`,{}, {
+                                    headers: {
+                                        'api-key': '42b06f3c-1f12-474e-82ed-af541103961b'
+                                    },
+                                    withCredentials: true
+                                }).then(response => {
+                                    if (response.data.resultCode === 0) {
+                                        toggleFollow(props.info.id)
+                                    }
+                                })
+                            } else {
+                                axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${props.info.id}`, {
+                                    headers: {
+                                        'api-key': '42b06f3c-1f12-474e-82ed-af541103961b'
+                                    },
+                                    withCredentials: true
+                                }).then(response => {
+                                    if (response.data.resultCode === 0) {
+                                        toggleFollow(props.info.id)
+                                    }
+                                })
+                            }
+                        }}
+                >{props.info.followed ? 'Отписаться' : 'Подписаться'}</button>
             </div>
             <div className={style.center}>
                 <div className={style.name}>

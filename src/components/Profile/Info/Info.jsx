@@ -9,8 +9,6 @@ const Info = (props) => {
     if (!props.profile) {
         return <Preloader />
     }
-
-    console.log(props)
     return (
             <div className={style.info}>
                 <div className={style.photo}>
