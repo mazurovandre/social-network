@@ -1,6 +1,6 @@
 import React from "react";
 import style from './Users.module.sass';
-import User from "./User/User";
+import UserContainer from "./User/UserContainer";
 
 const Users = (props) => {
     const totalPages = Math.ceil(props.totalCount / props.pageSize);
@@ -19,7 +19,7 @@ const Users = (props) => {
     return (
         <div>
             <ul className={style.list}>
-                {props.users.map(user => <User key={user.id} info={user} toggleFollow={props.toggleFollow}/>)}
+                {props.users.map(user => <UserContainer key={user.id} {...user}/>)}
             </ul>
             <ul className={style.pagination}>
                 {pagesItems}

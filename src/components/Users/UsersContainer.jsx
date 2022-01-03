@@ -1,33 +1,17 @@
 import React from "react";
 import {connect} from "react-redux";
-import {
-    changeCurrentPage,
-    setTotalCount,
-    setUsers,
-    toggleFetching,
-    toggleFollow
-} from "../../redux/usersReducer";
+import {changeCurrentPage, getUsersThunk} from "../../redux/usersReducer";
 import Users from "./Users";
 import Preloader from "../common/Preloader/Preloader";
-import {getUsers} from "../../api/api";
 
 class UsersContainer extends React.Component {
     componentDidMount() {
-        this.props.toggleFetching(true);
-        getUsers(this.props.currentPage, this.props.pageSize).then(data => {
-            this.props.toggleFetching(false);
-            this.props.setUsers(data.items);
-            this.props.setTotalCount(data.totalCount);
-        })
+        this.props.getUsersThunk(this.props.currentPage, this.props.pageSize);
     }
 
     changeCurrentPage = (currentPage) => {
         this.props.changeCurrentPage(currentPage);
-        this.props.toggleFetching(true);
-        getUsers(currentPage, this.props.pageSize).then(data => {
-            this.props.toggleFetching(false);
-            this.props.setUsers(data.items);
-        })
+        this.props.getUsersThunk(currentPage, this.props.pageSize);
     }
 
     render() {
@@ -53,6 +37,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps,
-    {toggleFollow, setUsers, setTotalCount, changeCurrentPage, toggleFetching}
-    )(UsersContainer);
+export default connect(mapStateToProps, {changeCurrentPage, getUsersThunk})(UsersContainer);
