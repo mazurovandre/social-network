@@ -1,6 +1,6 @@
 // import React from "react";
 // import {connect} from "react-redux";
-// import Contacts from "./Contacts";
+// import InfoStatus from "./InfoStatus";
 //
 // const mapStateToProps = (state) => {
 //     return {
@@ -12,6 +12,6 @@
 //     return {}
 // }
 //
-// const InfoContainer = connect(mapStateToProps, mapDispatchToProps)(Contacts)
+// const InfoContainer = connect(mapStateToProps, mapDispatchToProps)(InfoStatus)
 //
 // export default InfoContainer;

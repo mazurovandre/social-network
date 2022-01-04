@@ -1,7 +1,7 @@
 import React from "react";
-import style from './Contacts.module.sass';
+import style from './InfoContacts.module.sass';
 
-const Contacts = (props) => {
+const InfoContacts = (props) => {
     return (
         <ul className={style.contacts}>
             {props.facebook &&
@@ -56,4 +56,4 @@ const Contacts = (props) => {
     );
 }
 
-export default Contacts;
+export default InfoContacts;

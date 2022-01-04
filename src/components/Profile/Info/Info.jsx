@@ -3,7 +3,8 @@ import style from './Info.module.sass';
 import bg from "../../../images/post.jpg"
 import avatar from "../../../images/avatar.jpg"
 import Preloader from "../../common/Preloader/Preloader";
-import Contacts from "./Contacts/Contacts";
+import InfoContacts from "./InfoContacts/InfoContacts";
+import InfoStatus from "./InfoStatus/InfoStatus";
 
 const Info = (props) => {
     if (!props.profile) {
@@ -20,8 +21,9 @@ const Info = (props) => {
                     </div>
                     <div className={style.about}>
                         <h2 className={style.title}>{props.profile.fullName}</h2>
+                        <InfoStatus status='Hello'/>
                         <h6 className={style.text}>{props.profile.aboutMe}</h6>
-                        <Contacts {...props.profile.contacts} />
+                        <InfoContacts {...props.profile.contacts} />
                     </div>
                 </div>
             </div>

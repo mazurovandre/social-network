@@ -47,15 +47,12 @@ const usersReducer = (state = initialState, action) => {
                 isFetching: action.isFetching
             }
         case TOGGLE_FOLLOWING:
-            let newState2 = {
+            return {
                 ...state,
                 isFollowing: action.isFollowing
                     ? [...state.isFollowing, action.id]
                     : state.isFollowing.filter(id => id !== action.id)
-                // isFollowing: [action.id]
             }
-            console.log(newState2);
-            return newState2
         default:
             return state;
     }
