@@ -77,6 +77,7 @@ export const getUsersThunk = (currentPage, pageSize) => {
         dispatch(toggleFetching(true));
         usersAPI.getUsers(currentPage, pageSize).then(data => {
             dispatch(toggleFetching(false));
+            dispatch(changeCurrentPage(currentPage))
             dispatch(setUsers(data.items));
             dispatch(setTotalCount(data.totalCount));
         })

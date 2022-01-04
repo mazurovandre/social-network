@@ -1,8 +1,10 @@
 import React from "react";
 import {connect} from "react-redux";
-import {changeCurrentPage, getUsersThunk} from "../../redux/usersReducer";
+import {getUsersThunk} from "../../redux/usersReducer";
 import Users from "./Users";
 import Preloader from "../common/Preloader/Preloader";
+import withAuthRedirectComponent from "../../hoc/withAuthRedirect";
+import {compose} from "redux";
 
 class UsersContainer extends React.Component {
     componentDidMount() {
@@ -10,7 +12,6 @@ class UsersContainer extends React.Component {
     }
 
     changeCurrentPage = (currentPage) => {
-        this.props.changeCurrentPage(currentPage);
         this.props.getUsersThunk(currentPage, this.props.pageSize);
     }
 
@@ -21,7 +22,7 @@ class UsersContainer extends React.Component {
                    currentPage={this.props.currentPage}
                    users={this.props.users}
                    toggleFollow={this.props.toggleFollow}
-                   changeCurrentPage={this.changeCurrentPage}/>
+                   changeCurrentPage={this.changeCurrentPage} />
             {this.props.isFetching && <Preloader />}
         </>
     }
@@ -37,4 +38,5 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, {changeCurrentPage, getUsersThunk})(UsersContainer);
+export default compose(connect(mapStateToProps, {getUsersThunk}), withAuthRedirectComponent)(UsersContainer)
+
