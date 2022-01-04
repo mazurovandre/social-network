@@ -10,6 +10,7 @@ const Info = (props) => {
     if (!props.profile) {
         return <Preloader />
     }
+    // console.log(props)
     return (
             <div className={style.info}>
                 <div className={style.photo}>
@@ -21,7 +22,7 @@ const Info = (props) => {
                     </div>
                     <div className={style.about}>
                         <h2 className={style.title}>{props.profile.fullName}</h2>
-                        <InfoStatus status='Hello'/>
+                        <InfoStatus status={props.status} updateStatus={props.updateUserStatusThunk}/>
                         <h6 className={style.text}>{props.profile.aboutMe}</h6>
                         <InfoContacts {...props.profile.contacts} />
                     </div>

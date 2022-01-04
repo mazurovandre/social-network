@@ -4,7 +4,10 @@ import ProfileContainer from "./ProfileContainer";
 
 
 const ProfileURLContainer = () => {
-    const {userId} = useParams()
+    let {userId} = useParams()
+    // if (userId === undefined) {
+    //     userId = 21586
+    // }
     return <ProfileContainer userId={userId}/>
 }
 

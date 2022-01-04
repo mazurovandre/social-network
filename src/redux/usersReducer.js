@@ -1,4 +1,4 @@
-import {usersAPI} from "../api/api";
+import {followAPI, usersAPI} from "../api/api";
 
 const TOGGLE_FOLLOW = 'TOGGLE_FOLLOW';
 const SET_USERS = 'SET_USERS';
@@ -85,12 +85,12 @@ export const toggleFollowThunk = (id, isFollow) => {
     return (dispatch) => {
         dispatch(toggleFollowing(true, id));
         if (isFollow) {
-            usersAPI.followUser(id).then(data => {
+            followAPI.followUser(id).then(data => {
                 if (data.resultCode === 0) {
                     dispatch(toggleFollow(id))
                 }})
         } else {
-            usersAPI.unfollowUser(id).then(data => {
+            followAPI.unfollowUser(id).then(data => {
                 if (data.resultCode === 0) {
                     dispatch(toggleFollow(id))
                 }
