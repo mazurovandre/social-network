@@ -4,13 +4,13 @@ import {toggleFollowThunk} from "../../../redux/usersReducer";
 import User from "./User";
 
 const UserContainer = (props) => {
-
+    // console.log(props)
     return <User {...props}/>
 }
 
 const mapStateToProps = (state) => {
     return {
-        isFollowing: state.usersPage.isFollowing
+        isFollowing: [...state.usersPage.isFollowing]
     }
 }
 

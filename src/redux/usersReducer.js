@@ -52,6 +52,7 @@ const usersReducer = (state = initialState, action) => {
                 isFollowing: action.isFollowing
                     ? [...state.isFollowing, action.id]
                     : state.isFollowing.filter(id => id !== action.id)
+                // isFollowing: [action.id]
             }
             console.log(newState2);
             return newState2

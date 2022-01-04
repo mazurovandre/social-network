@@ -7,6 +7,7 @@ const User = (props) => {
     if (props.isFollowing.length > 0) {
         debugger;
     }
+    // console.log(props.isFollowing)
     return (
         <li className={style.user}>
             <div className={style.left}>

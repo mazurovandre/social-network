@@ -74,14 +74,16 @@ export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile});
 
 export const getUserThunk = (id) => {
     return (dispatch) => {
-        usersAPI.getUser(id).then(data => {
-            console.log(data);
+        usersAPI.getUser(id)
+            .then(data => {
             dispatch(setUserProfile(data));
         })
+            .catch(
+                usersAPI.getUser(21586).then(data => {
+                    dispatch(setUserProfile(data));
+                })
+        )
     }
 }
-
-
-
 
 export default profileReducer;

@@ -4,6 +4,7 @@ import Info from "./Info/Info";
 
 
 const Profile = (props) => {
+
     return (
         <>
             <Info {...props}/>

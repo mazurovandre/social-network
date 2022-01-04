@@ -12,6 +12,7 @@ import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import ProfileURLContainer from "./components/Profile/ProfileURLContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
+import Login from "./components/Login/Login";
 
 const App = () => {
     return (
@@ -21,13 +22,14 @@ const App = () => {
                 <SidebarContainer />
                 <main className="main-content">
                     <Routes>
-                        <Route path="/" element={<ProfileContainer />}/>
-                        <Route path="/profile/:userId" element={<ProfileURLContainer />}/>
-                        <Route path="/dialogs" element={<DialogsContainer />}/>
+                        <Route path="*" element={<ProfileContainer />}/>
+                        <Route path="/profile/:userId/*" element={<ProfileURLContainer />}/>
+                        <Route path="/dialogs/*" element={<DialogsContainer />}/>
                         <Route path="/news" element={<News/>}/>
                         <Route path="/music" element={<Music/>}/>
                         <Route path="/settings" element={<Settings/>}/>
                         <Route path="/users" element={<UsersContainer/>}/>
+                        <Route path="/login/*" element={<Login/>}/>
                     </Routes>
                 </main>
                 <Footer/>

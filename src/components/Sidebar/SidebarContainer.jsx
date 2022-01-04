@@ -4,14 +4,11 @@ import Sidebar from "./Sidebar";
 
 const mapStateToProps = (state) => {
     return {
-        friends: state.sidebar.friends
+        friends: state.sidebar.friends,
+        isAuth: state.auth.isAuth
     }
 }
 
-const mapDispatchToProps = () => {
-    return {}
-}
-
-const SidebarContainer = connect(mapStateToProps, mapDispatchToProps)(Sidebar)
+const SidebarContainer = connect(mapStateToProps, {})(Sidebar)
 
 export default SidebarContainer;
