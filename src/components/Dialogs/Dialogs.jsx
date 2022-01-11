@@ -22,13 +22,13 @@ const Dialogs = (props) => {
         <div className={style.dialogs}>
             <div className={style.content}>
                 <div className={style.people}>
-                    <h4 className={style.title}>Контакты:</h4>
+                    <h4 className={style.title}>Contacts:</h4>
                     <ul className={style.people_list}>
                         {dialogs}
                     </ul>
                 </div>
                 <div className={style.messages}>
-                    <h4 className={style.title}>Сообщения:</h4>
+                    <h4 className={style.title}>Messages:</h4>
                     <div className={style.messages_block}>
                         <ul className={style.messages_list}>
                             {messages}

@@ -20,7 +20,7 @@ const User = (props) => {
                             ? props.toggleFollowThunk(props.id, false)
                             : props.toggleFollowThunk(props.id, true)
                         }}
-                >{props.followed ? 'Отписаться' : 'Подписаться'}</button>
+                >{props.followed ? 'Unfollow' : 'Follow'}</button>
             </div>
             <div className={style.center}>
                 <div className={style.name}>
@@ -28,10 +28,10 @@ const User = (props) => {
                 </div>
                 <h4 className={style.status}>{props.status}</h4>
             </div>
-            <div className={style.right}>
-                <h5 className={style.country}>{props.country ? props.country : 'Страна'}</h5>
-                <h5 className={style.city}>{props.city ? props.city : 'Город'}</h5>
-            </div>
+            {/*<div className={style.right}>*/}
+            {/*    <h5 className={style.country}>{props.country ? props.country : ''}</h5>*/}
+            {/*    <h5 className={style.city}>{props.city ? props.city : ''}</h5>*/}
+            {/*</div>*/}
         </li>
     );
 }

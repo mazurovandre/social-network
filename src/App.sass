@@ -8,9 +8,9 @@ body
 
 .app-wrapper
   display: grid
-  grid-template-areas: "header header" "sidebar content" "footer footer"
+  grid-template-areas: "header header" "sidebar content"
   grid-template-columns: 20% auto
-  grid-template-rows: 80px minmax(500px, auto) 80px
+  grid-template-rows: 80px minmax(calc(100vh - 160px), auto)
   grid-gap: 20px
   max-width: 1000px
   margin: 20px auto

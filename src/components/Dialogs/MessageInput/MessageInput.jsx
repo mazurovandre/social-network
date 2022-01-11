@@ -20,7 +20,7 @@ const MessageInput = (props) => {
             sentMessage();
         }}>
             <input type='text' ref={messageArea} className={style.textarea} onChange={changeMessageArea} value={props.messageText}/>
-            <button type='submit' className={style.btn}>Отправить</button>
+            <button type='submit' className={style.btn}>Sent</button>
         </form>
     )
 }

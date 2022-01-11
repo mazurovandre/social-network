@@ -2,7 +2,7 @@ import React from "react";
 import './App.sass';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 
-import Footer from "./components/Footer/Footer";
+// import Footer from "./components/Footer/Footer";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
@@ -32,7 +32,7 @@ const App = () => {
                         <Route path="/login/*" element={<Login/>}/>
                     </Routes>
                 </main>
-                <Footer/>
+                {/*<Footer/>*/}
             </div>
         </BrowserRouter>
     );

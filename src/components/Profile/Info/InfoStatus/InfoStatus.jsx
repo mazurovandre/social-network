@@ -17,8 +17,8 @@ class InfoStatus extends React.Component {
         this.setState({
             editMode: false
         })
-        console.log('Пропсы:', this.props);
-        console.log('Статус', this.props.updateStatus(this.state.status));
+        // console.log('Пропсы:', this.props);
+        // console.log('Статус', this.props.updateStatus(this.state.status));
 
         this.props.updateStatus(this.state.status)
         // debugger
@@ -27,6 +27,14 @@ class InfoStatus extends React.Component {
     onStatusChange = (e) => {
         this.setState(
             {status: e.currentTarget.value})
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (prevProps.status !== this.props.status) {
+            this.setState({
+                status: this.props.status
+            })
+        }
     }
 
     render() {
