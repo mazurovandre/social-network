@@ -1,13 +1,12 @@
 import React from "react";
 import PostsContainer from "./Posts/PostsContainer";
-import Info from "./Info/Info";
+import InfoContainer from "./Info/InfoContainer";
 
 
-const Profile = (props) => {
-    // console.log('Profile:', props)
+const Profile = () => {
     return (
         <>
-            <Info {...props}/>
+            <InfoContainer/>
             <PostsContainer/>
         </>
     )

@@ -1,28 +1,9 @@
-import bg from '../images/post.jpg';
-import ava from '../images/avatar.jpg';
 import {profileAPI} from "../api/api";
 
 const ADD_POST = 'ADD-POST';
 const ON_POST_CHANGE = 'ON-POST-CHANGE';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const SET_STATUS = 'SET_STATUS';
-
-export const myProfile = {
-    fullName: 'Мазуров Андрей',
-    aboutMe: 'Статус 3000',
-    lookingForAJob: true,
-    lookingForAJobDescription: 'Да возьмите меня кто-нибудь',
-    photos: {
-        large: bg,
-        small: ava
-    },
-    contacts: {
-        facebook: 'www.facebook.com',
-        vk: 'www.vk.com',
-        github: 'www.github.com',
-        website: 'mazurovandre.github.io',
-    }
-}
 
 let initialState = {
     postsData: [
@@ -86,11 +67,6 @@ export const getUserThunk = (id) => {
             .then(data => {
             dispatch(setUserProfile(data));
         })
-        //     .catch(
-        //         profileAPI.getUser().then(data => {
-        //             dispatch(setUserProfile(data));
-        //         })
-        // )
     }
 }
 

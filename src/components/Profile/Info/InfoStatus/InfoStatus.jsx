@@ -1,53 +1,37 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 
-class InfoStatus extends React.Component {
+const InfoStatus = (props) => {
 
-    state = {
-        editMode: false,
-        status: this.props.status
+    let [editMode, setEditMode] = useState(false);
+    let [status, setStatus] = useState(props.status);
+
+    useEffect(() => {
+        setStatus(props.status);
+    }, [props.status])
+
+    const enableEditMode = () => {
+        setEditMode(true);
+    };
+
+    const disableEditMode = () => {
+        setEditMode(false);
+        props.updateStatus(status);
+    };
+
+    const onStatusChange = (e) => {
+        setStatus(e.currentTarget.value);
     }
 
-    enableEditMode = () => {
-        this.setState({
-            editMode: true
-        })
-    }
-
-    disableEditMode = () => {
-        this.setState({
-            editMode: false
-        })
-        // console.log('Пропсы:', this.props);
-        // console.log('Статус', this.props.updateStatus(this.state.status));
-
-        this.props.updateStatus(this.state.status)
-        // debugger
-    }
-
-    onStatusChange = (e) => {
-        this.setState(
-            {status: e.currentTarget.value})
-    }
-
-    componentDidUpdate(prevProps, prevState) {
-        if (prevProps.status !== this.props.status) {
-            this.setState({
-                status: this.props.status
-            })
-        }
-    }
-
-    render() {
-        return <>
-            {!this.state.editMode &&
-                <h5 onDoubleClick={this.enableEditMode}>{this.props.status}</h5>
+    return (
+        <>
+            {!editMode &&
+            <h5 onDoubleClick={enableEditMode}>{status || 'Enter your status'}</h5>
             }
-            {this.state.editMode &&
-                <input type='text' value={this.state.status} autoFocus={true} onBlur={this.disableEditMode} onChange={this.onStatusChange}/>
+            {editMode &&
+            <input type='text' value={status} autoFocus={true} onBlur={disableEditMode} onChange={onStatusChange}/>
             }
-            </>
-
-    }
+        </>
+    )
 }
 
 export default InfoStatus;

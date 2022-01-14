@@ -1,17 +1,15 @@
-// import React from "react";
-// import {connect} from "react-redux";
-// import InfoStatus from "./InfoStatus";
-//
-// const mapStateToProps = (state) => {
-//     return {
-//         personInfo: state.profilePage.personInfo
-//     }
-// }
-//
-// const mapDispatchToProps = () => {
-//     return {}
-// }
-//
-// const InfoContainer = connect(mapStateToProps, mapDispatchToProps)(InfoStatus)
-//
-// export default InfoContainer;
+import React from "react";
+import {connect} from "react-redux";
+import Info from "./Info";
+import {updateUserStatusThunk} from "../../../redux/profileReducer";
+
+const mapStateToProps = (state) => {
+    return {
+        profile: state.profilePage.profile,
+        status: state.profilePage.status
+    }
+}
+
+const InfoContainer = connect(mapStateToProps, {updateUserStatusThunk})(Info)
+
+export default InfoContainer;
