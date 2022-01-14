@@ -72,7 +72,7 @@ export const toggleFollowing = (isFollowing, id) => ({type: TOGGLE_FOLLOWING, is
 export const getUsersThunk = (currentPage, pageSize) => {
     return (dispatch) => {
         dispatch(toggleFetching(true));
-        usersAPI.getUsers(currentPage, pageSize).then(data => {
+        usersAPI.requestUsers(currentPage, pageSize).then(data => {
             dispatch(toggleFetching(false));
             dispatch(changeCurrentPage(currentPage))
             dispatch(setUsers(data.items));
