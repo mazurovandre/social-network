@@ -1,19 +1,24 @@
-export const getUsers = (state) => {
-    return state.usersPage.users
-}
+import {createSelector} from "reselect";
 
-export const getUsersTotalCount = (state) => {
-    return state.usersPage.totalCount
-}
+const getUsersReselect = state => state.usersPage.users;
+const getUsersTotalCountReselect = state => state.usersPage.totalCount;
+const getUsersPageSizeReselect = state => state.usersPage.pageSize;
+const getUsersCurrentPageReselect = state => state.usersPage.currentPage;
+const getUsersIsFetchingReselect = state => state.usersPage.isFetching;
 
-export const getUsersPageSize = (state) => {
-    return state.usersPage.pageSize
-}
+// Reselect lib:
 
-export const getUsersCurrentPage = (state) => {
-    return state.usersPage.currentPage
-}
+export const getUsers = createSelector(getUsersReselect,
+    (users) => users.filter(user => true)) // фейковая фильтрация
 
-export const getUsersIsFetching = (state) => {
-    return state.usersPage.isFetching
-}
+export const getUsersTotalCount = createSelector(getUsersTotalCountReselect,
+    (totalCount) => totalCount)
+
+export const getUsersPageSize = createSelector(getUsersPageSizeReselect,
+    (pageSize) => pageSize)
+
+export const getUsersCurrentPage = createSelector(getUsersCurrentPageReselect,
+    (currentPage) => currentPage)
+
+export const getUsersIsFetching = createSelector(getUsersIsFetchingReselect,
+    (isFetching) => isFetching)
