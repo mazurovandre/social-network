@@ -25,11 +25,9 @@ export const setUserData = (userId, login, email, isAuth) => ({type: SET_USER_DA
 
 export const authThunk = () => {
     return (dispatch) => {
-        authAPI.authMe().then(data => {
+        return authAPI.authMe().then(data => {
             if (data.resultCode === 0) {
                 dispatch(setUserData(data.data.id, data.data.login, data.data.email, true));
-            } else {
-                console.warn('Please, log in!');
             }
         })
     }

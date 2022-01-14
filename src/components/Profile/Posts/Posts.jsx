@@ -3,7 +3,6 @@ import style from './Posts.module.sass';
 import Post from "./Post/Post";
 
 const Posts = (props) => {
-    // console.log(props.postsData)
     const posts = props.postsData.map(state => <Post key={state.id} state={state}/>);
     const newPostElement = React.createRef();
 
@@ -23,8 +22,8 @@ const Posts = (props) => {
                 event.preventDefault();
                 addPost();
             }}>
-                <h5 className={style.title}>Мои посты:</h5>
-                <textarea ref={newPostElement} name="form" id="form" cols="30" rows="10" placeholder="Напишите свой пост"
+                <h5 className={style.title}>My posts:</h5>
+                <textarea ref={newPostElement} name="form" id="form" cols="30" rows="10" placeholder="Write your post"
                           value={props.newPostText} onChange={onPostChange}/>
                 <button type='submit'>Отправить</button>
             </form>
