@@ -5,7 +5,7 @@ import {Formik} from "formik";
 const LoginForm = (props) => {
     return (
         <Formik
-            initialValues={{ email: '', password: '', isRemembered: false }}
+            initialValues={{ email: 'mazurovandre@gmail.com', password: 'kamasutra123', isRemembered: false }}
             validate={values => {
                 const errors = {};
                 if (!values.email) {

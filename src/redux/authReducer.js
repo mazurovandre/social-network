@@ -14,8 +14,7 @@ const authReducer = (state = initialState, action) => {
         case SET_USER_DATA:
             return {
                 ...state,
-                ...action.data,
-                isAuth: true
+                ...action.data
             };
         default:
             return state;
@@ -29,6 +28,8 @@ export const authThunk = () => {
         authAPI.authMe().then(data => {
             if (data.resultCode === 0) {
                 dispatch(setUserData(data.data.id, data.data.login, data.data.email, true));
+            } else {
+                console.warn('Please, log in!');
             }
         })
     }
@@ -38,6 +39,9 @@ export const loginThunk = (email, password, rememberMe) => (dispatch) => {
     authAPI.login(email, password, rememberMe).then(data => {
         if (data.resultCode === 0) {
             dispatch(authThunk());
+        } else {
+            console.error('Failed to login to the server');
+            dispatch(setUserData(null, null, null, false));
         }
     })
 }
@@ -46,6 +50,8 @@ export const logoutThunk = () => (dispatch) => {
     authAPI.logout().then(data => {
         if (data.resultCode === 0) {
             dispatch(setUserData(null, null, null, false));
+        } else {
+            console.error('Failed to logoff from the server');
         }
     })
 }
