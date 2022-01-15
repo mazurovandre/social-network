@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from "react";
+import style from "../Info.module.sass";
 
 const InfoStatus = (props) => {
 
@@ -23,14 +24,14 @@ const InfoStatus = (props) => {
     }
 
     return (
-        <>
+        <div className={style.status}>
             {!editMode &&
             <h5 onDoubleClick={enableEditMode}>{status || 'Enter your status'}</h5>
             }
             {editMode &&
             <input type='text' value={status} autoFocus={true} onBlur={disableEditMode} onChange={onStatusChange}/>
             }
-        </>
+        </div>
     )
 }
 

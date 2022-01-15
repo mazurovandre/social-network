@@ -3,6 +3,7 @@ import style from './Posts.module.sass';
 import Post from "./Post/Post";
 
 const Posts = (props) => {
+
     const posts = props.postsData.map(state => <Post key={state.id} state={state}/>);
     const newPostElement = React.createRef();
 
@@ -23,9 +24,9 @@ const Posts = (props) => {
                 addPost();
             }}>
                 <h5 className={style.title}>My posts:</h5>
-                <textarea ref={newPostElement} name="form" id="form" cols="30" rows="10" placeholder="Write your post"
+                <textarea ref={newPostElement} name="form" id="form" cols="30" rows="10" placeholder="Write what's on your mind"
                           value={props.newPostText} onChange={onPostChange}/>
-                <button type='submit'>Отправить</button>
+                <button type='submit'>Post</button>
             </form>
             <ul className={style.list}>
                 {posts}
