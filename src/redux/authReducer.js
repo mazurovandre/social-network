@@ -33,13 +33,13 @@ export const authThunk = () => {
     }
 }
 
-export const loginThunk = (email, password, rememberMe) => (dispatch) => {
-    authAPI.login(email, password, rememberMe).then(data => {
+export const loginThunk = ({email, password, rememberMe}, setErrorStatus) => (dispatch) => {
+    authAPI.login(email, password, rememberMe = true).then(data => {
         if (data.resultCode === 0) {
             dispatch(authThunk());
+            setErrorStatus('')
         } else {
-            console.error('Failed to login to the server');
-            dispatch(setUserData(null, null, null, false));
+            setErrorStatus(...data.messages);
         }
     })
 }
