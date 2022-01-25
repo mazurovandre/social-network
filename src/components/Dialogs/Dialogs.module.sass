@@ -1,21 +1,20 @@
 .dialogs
-
   height: calc(100vh - 200px)
-  //overflow: hidden
-  //height: 100%
 
 .content
-  height: 100%
-  display: grid
-  grid-template-columns: 1fr 3fr
+  display: flex
+  align-items: stretch
   overflow: hidden
+  height: 100%
 
 .people
+  flex-grow: 1
   margin: 20px 0
   border-right: 1px solid #E7E8EC
   max-height: 100%
 
 .messages
+  flex-grow: 3
   margin: 20px 0
   display: flex
   flex-direction: column
@@ -32,14 +31,19 @@
 
 .messages_block
   overflow: hidden
-  height: calc(100vh - 365px)
+  min-height: 400px
+  position: relative
 
 .messages_list
-  margin: 0 40px
-  padding: 0
+  position: absolute
+  top: 0
+  right: -20px
+  width: 100%
+  padding: 0 20px 0 0
   list-style-type: none
-  overflow-y: auto
+  overflow-y: scroll
   height: 100%
+  margin: 0
 
 .name
   font-size: 20px

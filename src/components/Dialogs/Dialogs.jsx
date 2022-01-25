@@ -34,9 +34,7 @@ const Dialogs = (props) => {
                             {messages}
                         </ul>
                     </div>
-                    <div className={style.input}>
-                        <MessageInputContainer />
-                    </div>
+                    <MessageInputContainer />
                 </div>
             </div>
         </div>

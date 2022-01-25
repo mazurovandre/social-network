@@ -17,14 +17,14 @@ const Users = (props) => {
     const pagesItems = pages.map(num => <li className={num === currentPage ? style.active : undefined} key={num}
                                             onClick={() => {props.changeCurrentPage(num)}}>{num}</li>);
     return (
-        <div>
+        <>
             <ul className={style.list}>
                 {props.users.map(user => <UserContainer key={user.id} {...user}/>)}
             </ul>
             <ul className={style.pagination}>
                 {pagesItems}
             </ul>
-        </div>
+        </>
     );
 }
 
