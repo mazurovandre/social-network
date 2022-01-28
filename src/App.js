@@ -14,7 +14,7 @@ import ProfileURLContainer from "./components/Profile/ProfileURLContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from "./components/Login/Login";
 import {connect} from "react-redux";
-import {initializeThunk} from "./redux/appReducer";
+import {initializeThunk} from "./redux/appReducer.ts";
 import Preloader from "./components/common/Preloader/Preloader";
 
 class App extends React.Component {

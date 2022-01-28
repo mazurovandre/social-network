@@ -1,4 +1,4 @@
-import {changeMessageAreaActionCreator, sentMessageActionCreator} from "../../../redux/dialogsReducer";
+import {changeMessageAreaActionCreator, sentMessageActionCreator} from "../../../redux/dialogsReducer.ts";
 import MessageInput from "./MessageInput";
 import {connect} from "react-redux";
 
