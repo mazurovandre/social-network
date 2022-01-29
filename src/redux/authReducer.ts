@@ -1,4 +1,4 @@
-import {authAPI} from "./../api/api";
+import {authAPI} from "../api/api";
 
 const SET_USER_DATA = 'SET_USER_DATA';
 
@@ -44,14 +44,12 @@ export const setUserData = (userId: number, login: string, email: string, isAuth
     type: SET_USER_DATA, data: {userId, email, login, isAuth}
 });
 
-export const authThunk = () => {
-    return (dispatch) => {
-        return authAPI.authMe().then(data => {
-            if (data.resultCode === 0) {
-                dispatch(setUserData(data.data.id, data.data.login, data.data.email, true));
-            }
-        })
-    }
+export const authThunk = () => dispatch => {
+    return authAPI.authMe().then(data => {
+        if (data.resultCode === 0) {
+            dispatch(setUserData(data.data.id, data.data.login, data.data.email, true));
+        }
+    })
 }
 
 export const loginThunk = ({email, password, rememberMe}, setErrorStatus) => (dispatch) => {

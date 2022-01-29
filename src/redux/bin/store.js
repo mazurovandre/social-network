@@ -1,6 +1,6 @@
-import avatar from '../images/avatar.jpg';
-import profileReducer from "./profileReducer";
-import dialogsReducer from "./dialogsReducer";
+import avatar from '../../images/avatar.jpg';
+import profileReducer from "../profileReducer";
+import dialogsReducer from "../dialogsReducer";
 import sidebarReducer from "./sidebarReducer";
 
 let store = {

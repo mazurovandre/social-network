@@ -1,5 +1,8 @@
 {
   "files": [
-    "./src/redux/appReducer.ts"
+    "./src/redux/appReducer.ts",
+    "./src/redux/profileReducer.ts",
+    "./src/redux/usersReducer.ts",
+    "./src/redux/usersSelectors.ts"
   ]
 }

@@ -1,7 +1,24 @@
 const CHANGE_MESSAGE_AREA = 'CHANGE-MESSAGE-AREA';
 const SENT_MESSAGE = 'SENT-MESSAGE';
 
-let initialState = {
+type DialogType = {
+    id: number
+    name: string
+}
+
+type MessageType = {
+    id: number
+    text: string
+    isOutcome: boolean
+}
+
+type InitialStateType = {
+    dialogsData: Array<DialogType>
+    dialogsMessages: Array<MessageType>
+    messageText: string
+}
+
+let initialState: InitialStateType = {
     dialogsData: [
         {id: 1, name: 'Andrey'},
         {id: 2, name: 'Michael'},
@@ -20,7 +37,7 @@ let initialState = {
     messageText: ''
 }
 
-const dialogsReducer = (state = initialState, action) => {
+const dialogsReducer = (state = initialState, action): InitialStateType => {
     switch (action.type) {
         case CHANGE_MESSAGE_AREA:
             return {
@@ -45,7 +62,20 @@ const dialogsReducer = (state = initialState, action) => {
             return state;
     }
 }
-export const changeMessageAreaActionCreator = (text) => ({type: CHANGE_MESSAGE_AREA, newText: text});
-export const sentMessageActionCreator = () => ({type: SENT_MESSAGE});
+
+type ChangeMessageAreaActionCreatorType = {
+    type: typeof CHANGE_MESSAGE_AREA;
+    newText: string
+}
+
+type SentMessageActionCreatorType = {
+    type: typeof SENT_MESSAGE
+}
+
+export const changeMessageAreaActionCreator = (text: string): ChangeMessageAreaActionCreatorType =>
+    ({type: CHANGE_MESSAGE_AREA, newText: text});
+
+export const sentMessageActionCreator = (): SentMessageActionCreatorType =>
+    ({type: SENT_MESSAGE});
 
 export default dialogsReducer;

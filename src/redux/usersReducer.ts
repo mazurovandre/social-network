@@ -7,7 +7,16 @@ const CHANGE_CURRENT_PAGE = 'CHANGE_CURRENT_PAGE';
 const TOGGLE_FETCHING = 'TOGGLE_FETCHING';
 const TOGGLE_FOLLOWING = 'TOGGLE_FOLLOWING';
 
-let initialState = {
+type InitialStateType = {
+    users: Array<any>
+    totalCount: number
+    pageSize: number
+    currentPage: number
+    isFetching: boolean
+    isFollowing: Array<any>
+}
+
+let initialState: InitialStateType = {
     users: [],
     totalCount: 0,
     pageSize: 10,
@@ -16,7 +25,7 @@ let initialState = {
     isFollowing: []
 }
 
-const usersReducer = (state = initialState, action) => {
+const usersReducer = (state = initialState, action: any): InitialStateType => {
     switch (action.type) {
         case TOGGLE_FOLLOW:
             const newState = {
@@ -58,18 +67,51 @@ const usersReducer = (state = initialState, action) => {
     }
 }
 
+// Types for Action Creators
+
+type ToggleFollowType = {
+    type: typeof TOGGLE_FOLLOW;
+    id: number
+}
+
+type SetUsersType = {
+    type: typeof SET_USERS;
+    users: Array<any>
+}
+
+type SetTotalCountType = {
+    type: typeof SET_TOTAL_COUNT;
+    totalCount: number
+}
+
+type ChangeCurrentPageType = {
+    type: typeof CHANGE_CURRENT_PAGE;
+    currentPage: number
+}
+
+type ToggleFetchingType = {
+    type: typeof TOGGLE_FETCHING;
+    isFetching: boolean
+}
+
+type ToggleFollowingType = {
+    type: typeof TOGGLE_FOLLOWING;
+    isFollowing: boolean;
+    id: number
+}
+
 // Action Creators
 
-export const toggleFollow = (id) => ({type: TOGGLE_FOLLOW, id});
-export const setUsers = (users) => ({type: SET_USERS, users});
-export const setTotalCount = (totalCount) => ({type: SET_TOTAL_COUNT, totalCount});
-export const changeCurrentPage = (currentPage) => ({type: CHANGE_CURRENT_PAGE, currentPage});
-export const toggleFetching = (isFetching) => ({type: TOGGLE_FETCHING, isFetching});
-export const toggleFollowing = (isFollowing, id) => ({type: TOGGLE_FOLLOWING, isFollowing, id});
+export const toggleFollow = (id: number): ToggleFollowType => ({type: TOGGLE_FOLLOW, id});
+export const setUsers = (users: Array<any>): SetUsersType => ({type: SET_USERS, users});
+export const setTotalCount = (totalCount: number): SetTotalCountType => ({type: SET_TOTAL_COUNT, totalCount});
+export const changeCurrentPage = (currentPage: number): ChangeCurrentPageType => ({type: CHANGE_CURRENT_PAGE, currentPage});
+export const toggleFetching = (isFetching: boolean): ToggleFetchingType => ({type: TOGGLE_FETCHING, isFetching});
+export const toggleFollowing = (isFollowing: boolean, id: number): ToggleFollowingType => ({type: TOGGLE_FOLLOWING, isFollowing, id});
 
 // Redux Thunks
 
-export const getUsersThunk = (currentPage, pageSize) => {
+export const getUsersThunk = (currentPage: number, pageSize: number) => {
     return (dispatch) => {
         dispatch(toggleFetching(true));
         usersAPI.requestUsers(currentPage, pageSize).then(data => {
