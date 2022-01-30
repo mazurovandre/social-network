@@ -11,7 +11,7 @@ export interface mapStateToPropsType {
     isAuth: boolean
 }
 
-const mapStateToProps = (state): mapStateToPropsType => {
+const mapStateToProps = (state: any): mapStateToPropsType => {
     return {
         dialogsData: state.dialogsPage.dialogsData,
         dialogsMessages: state.dialogsPage.dialogsMessages,

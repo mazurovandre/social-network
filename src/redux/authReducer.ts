@@ -29,9 +29,9 @@ const authReducer = (state = initialState, action: SetUserDataActionType): Initi
 }
 
 type SetUserDataActionDataType = {
-    userId: number,
-    email: string,
-    login: string,
+    userId: number | null,
+    email: string | null,
+    login: string | null,
     isAuth: boolean
 }
 
@@ -40,11 +40,16 @@ type SetUserDataActionType = {
     data: SetUserDataActionDataType
 }
 
-export const setUserData = (userId: number, login: string, email: string, isAuth: boolean): SetUserDataActionType => ({
-    type: SET_USER_DATA, data: {userId, email, login, isAuth}
+export const setUserData = (
+    userId: number | null,
+    login: string | null,
+    email: string | null,
+    isAuth: boolean): SetUserDataActionType => ({
+    type: SET_USER_DATA,
+    data: {userId, email, login, isAuth}
 });
 
-export const authThunk = () => dispatch => {
+export const authThunk = () => (dispatch: any) => {
     return authAPI.authMe().then(data => {
         if (data.resultCode === 0) {
             dispatch(setUserData(data.data.id, data.data.login, data.data.email, true));
@@ -52,7 +57,7 @@ export const authThunk = () => dispatch => {
     })
 }
 
-export const loginThunk = ({email, password, rememberMe}, setErrorStatus) => (dispatch) => {
+export const loginThunk = ({email, password, rememberMe}: any, setErrorStatus: any) => (dispatch: any) => {
     authAPI.login(email, password, rememberMe = true).then(data => {
         if (data.resultCode === 0) {
             dispatch(authThunk());
@@ -63,7 +68,7 @@ export const loginThunk = ({email, password, rememberMe}, setErrorStatus) => (di
     })
 }
 
-export const logoutThunk = () => (dispatch) => {
+export const logoutThunk = () => (dispatch: any) => {
     authAPI.logout().then(data => {
         if (data.resultCode === 0) {
             dispatch(setUserData(null, null, null, false));

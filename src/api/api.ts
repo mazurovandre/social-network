@@ -21,7 +21,7 @@ export const authAPI = {
     authMe() {
         return instance.get(`auth/me`).then(response => response.data)
     },
-    login(email, password, rememberMe = false) {
+    login(email: string, password: string, rememberMe = false) {
         return instance.post(`auth/login`, {email, password, rememberMe}).then(response => response.data)
     },
     logout() {
@@ -30,10 +30,10 @@ export const authAPI = {
 }
 
 export const followAPI = {
-    followUser(id) {
+    followUser(id: number) {
         return instance.post(`follow/${id}`).then(response => response.data)
     },
-    unfollowUser(id) {
+    unfollowUser(id: number) {
         return instance.delete(`follow/${id}`).then(response => response.data)
     }
 }
@@ -42,10 +42,10 @@ export const profileAPI = {
     getUser(userId = 21586) {
         return instance.get(`profile/${userId}`).then(response => response.data)
     },
-    getStatus(userId) {
+    getStatus(userId: number) {
         return instance.get(`profile/status/${userId}`)
     },
-    updateStatus(status) {
+    updateStatus(status: string) {
         return instance.put(`profile/status/`, {status: status})
     },
 }

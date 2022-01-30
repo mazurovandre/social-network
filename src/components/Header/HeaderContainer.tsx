@@ -7,7 +7,7 @@ export interface HeaderProps {
     login: string | null
 }
 
-const mapStateToProps = (state): HeaderProps => ({
+const mapStateToProps = (state: any): HeaderProps => ({
     isAuth: state.auth.isAuth,
     login: state.auth.login
 });

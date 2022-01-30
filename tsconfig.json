@@ -1,11 +1,16 @@
 {
+  "compileOnSave": true,
   "compilerOptions": {
+    "target": "es5",
+    "outDir": "./built",
+    "allowJs": true,
+    "strict": true,
+    "baseUrl": "./src/",
+    "typeRoots": ["./node_modules/@types"],
+    "allowSyntheticDefaultImports": true,
     "jsx": "react"
   },
-  "files": [
-    "./src/redux/appReducer.ts",
-    "./src/redux/profileReducer.ts",
-    "./src/redux/usersReducer.ts",
-    "./src/redux/usersSelectors.ts"
+  "include": [
+    "src/**/*"
   ]
 }

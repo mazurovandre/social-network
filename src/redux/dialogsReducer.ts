@@ -1,5 +1,5 @@
-import DialogType from './../types/types'
-import MessageType from './../types/types'
+import {DialogType} from '../types/types'
+import {MessageType} from '../types/types'
 
 const CHANGE_MESSAGE_AREA = 'CHANGE-MESSAGE-AREA';
 const SENT_MESSAGE = 'SENT-MESSAGE';

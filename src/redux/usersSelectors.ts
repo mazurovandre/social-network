@@ -1,10 +1,10 @@
 import {createSelector} from "reselect";
 
-const getUsersReselect = state => state.usersPage.users;
-const getUsersTotalCountReselect = state => state.usersPage.totalCount;
-const getUsersPageSizeReselect = state => state.usersPage.pageSize;
-const getUsersCurrentPageReselect = state => state.usersPage.currentPage;
-const getUsersIsFetchingReselect = state => state.usersPage.isFetching;
+const getUsersReselect = (state: any) => state.usersPage.users;
+const getUsersTotalCountReselect = (state: any) => state.usersPage.totalCount;
+const getUsersPageSizeReselect = (state: any) => state.usersPage.pageSize;
+const getUsersCurrentPageReselect = (state: any) => state.usersPage.currentPage;
+const getUsersIsFetchingReselect = (state: any) => state.usersPage.isFetching;
 
 // Reselect lib:
 

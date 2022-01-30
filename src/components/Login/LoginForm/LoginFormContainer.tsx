@@ -1,4 +1,4 @@
-import {loginThunk} from "../../../redux/authReducer.ts";
+import {loginThunk} from "../../../redux/authReducer";
 import {connect} from "react-redux";
 import LoginForm from "./LoginForm";
 
