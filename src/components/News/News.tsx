@@ -1,7 +1,7 @@
-import React from "react";
+import React, {FC} from "react";
 // import style from './News.module.sass';
 
-const News = () => {
+const News:FC<{}> = () => {
   return (
       <div>
 

@@ -1,15 +1,15 @@
-import React, {useState} from "react";
+import React, {FC, useState} from "react";
 import style from './LoginForm.module.sass'
 import {Field, Form, Formik} from "formik";
 import * as Yup from 'yup';
 
-const LoginForm = (props) => {
+const LoginForm:FC<any> = ({loginThunk}) => {
 
     const [errorStatus, setErrorStatus] = useState('');
 
     const initialValues = {
-        email: 'free@samuraijs.com',
-        password: 'free'
+        email: 'mazurovandre@gmail.com',
+        password: 'kamasutra123'
     }
 
     const validationSchema = Yup.object({
@@ -23,7 +23,7 @@ const LoginForm = (props) => {
             validationSchema={validationSchema}
             onSubmit={async (values, {resetForm}) => {
                 await new Promise((resolve, reject) => {
-                    resolve(props.loginThunk(values, setErrorStatus))
+                    resolve(loginThunk(values, setErrorStatus))
                     reject(resetForm({values: initialValues}))
                 })
             }}

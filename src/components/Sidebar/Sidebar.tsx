@@ -1,14 +1,8 @@
-import React from "react";
+import React, {FC} from "react";
 import style from './Sidebar.module.sass';
 import {NavLink} from "react-router-dom";
 
-const Sidebar = () => {
-    // const friends = props.friends.map(friend => {
-    //     return (<li className={style.friends_item} key={friend.id}>
-    //         <img src={friend.avatar} alt="ava" width='60' height='60'/>
-    //         <h6 className={style.name}>{friend.name}</h6>
-    //     </li>)
-    // });
+const Sidebar:FC<{}> = () => {
     return (
         <aside className={style.sidebar}>
             <nav>
@@ -38,13 +32,6 @@ const Sidebar = () => {
                                  className={link => link.isActive ? `${style.link} ${style.active}` : style.link}>Find people</NavLink>
                     </li>
                 </ul>
-                {/*{ props.isAuth && <div className={style.friends}>*/}
-                {/*    <h4 className={style.title}>Друзья онлайн:</h4>*/}
-                {/*    <ul className={style.friends_list}>*/}
-                {/*        {friends}*/}
-                {/*    </ul>*/}
-                {/*</div> }*/}
-
             </nav>
         </aside>
     );

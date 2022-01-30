@@ -1,16 +1,18 @@
-import React from "react";
+import React, {FC} from "react";
 import style from './Dialogs.module.sass';
 import DialogName from "./DialogName/DialogName";
 import Message from "./Message/Message";
 import MessageInputContainer from "./MessageInput/MessageInputContainer";
 import Login from "../Login/Login";
 import {Routes, Route} from 'react-router-dom';
+import {mapStateToPropsType as DialogsProps} from "./DialogsContainer";
 
-const Dialogs = (props) => {
-    const dialogs = props.dialogsData.map(person => <DialogName key={person.id} name={person.name} id={person.id.toString()}/>);
-    const messages = props.dialogsMessages.map(message => <Message key={message.id} message={message.text} isOutcome={message.isOutcome}/>);
 
-    if (!props.isAuth) {
+const Dialogs:FC<DialogsProps> = ({dialogsData, dialogsMessages, isAuth}) => {
+    const dialogs = dialogsData.map(person => <DialogName key={person.id} name={person.name} id={person.id}/>);
+    const messages = dialogsMessages.map(message => <Message key={message.id} message={message.text} isOutcome={message.isOutcome}/>);
+
+    if (!isAuth) {
         return (
             <Routes>
                 <Route path="/" element={<Login />} />

@@ -1,7 +1,7 @@
-import React from "react";
+import React, {FC} from "react";
 // import style from './Music.module.sass';
 
-const Music = () => {
+const Music:FC<{}> = () => {
   return (
       <div>
 

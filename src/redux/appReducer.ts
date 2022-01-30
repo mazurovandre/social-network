@@ -2,7 +2,7 @@ import {authThunk} from './authReducer';
 
 const SET_INITIALIZED = 'SET_INITIALIZED';
 
-export type InitialStateType = {
+type InitialStateType = {
     isInitialized: boolean
 }
 
@@ -22,7 +22,7 @@ const appReducer = (state = initialState, action: setInitializedActionType): Ini
     }
 }
 
-export type setInitializedActionType = {
+type setInitializedActionType = {
     type: typeof SET_INITIALIZED
 }
 

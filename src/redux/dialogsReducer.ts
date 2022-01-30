@@ -1,16 +1,8 @@
+import DialogType from './../types/types'
+import MessageType from './../types/types'
+
 const CHANGE_MESSAGE_AREA = 'CHANGE-MESSAGE-AREA';
 const SENT_MESSAGE = 'SENT-MESSAGE';
-
-type DialogType = {
-    id: number
-    name: string
-}
-
-type MessageType = {
-    id: number
-    text: string
-    isOutcome: boolean
-}
 
 type InitialStateType = {
     dialogsData: Array<DialogType>
@@ -37,7 +29,7 @@ let initialState: InitialStateType = {
     messageText: ''
 }
 
-const dialogsReducer = (state = initialState, action): InitialStateType => {
+const dialogsReducer = (state = initialState, action: DialogsReducerActionType): InitialStateType => {
     switch (action.type) {
         case CHANGE_MESSAGE_AREA:
             return {
@@ -63,11 +55,12 @@ const dialogsReducer = (state = initialState, action): InitialStateType => {
     }
 }
 
+type DialogsReducerActionType = ChangeMessageAreaActionCreatorType | SentMessageActionCreatorType
+
 type ChangeMessageAreaActionCreatorType = {
     type: typeof CHANGE_MESSAGE_AREA;
     newText: string
 }
-
 type SentMessageActionCreatorType = {
     type: typeof SENT_MESSAGE
 }

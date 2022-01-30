@@ -5,7 +5,6 @@ import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
-import SidebarContainer from "./components/Sidebar/SidebarContainer";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
@@ -15,6 +14,7 @@ import Login from "./components/Login/Login";
 import {connect} from "react-redux";
 import {initializeThunk} from "./redux/appReducer.ts";
 import Preloader from "./components/common/Preloader/Preloader";
+import Sidebar from "./components/Sidebar/Sidebar";
 
 class App extends React.Component {
 
@@ -30,7 +30,7 @@ class App extends React.Component {
             <BrowserRouter>
                 <div className='app-wrapper'>
                     <HeaderContainer/>
-                    <SidebarContainer/>
+                    <Sidebar/>
                     <main className="main-content">
                         <Routes>
                             <Route path="*" element={<ProfileContainer/>}/>

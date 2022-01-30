@@ -9,7 +9,7 @@ const getUsersIsFetchingReselect = state => state.usersPage.isFetching;
 // Reselect lib:
 
 export const getUsers = createSelector(getUsersReselect,
-    (users) => users.filter(user => true)) // фейковая фильтрация
+    (users) => users.filter(() => true)) // фейковая фильтрация
 
 export const getUsersTotalCount = createSelector(getUsersTotalCountReselect,
     (totalCount) => totalCount)

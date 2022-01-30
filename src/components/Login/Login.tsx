@@ -1,8 +1,8 @@
-import React from "react";
+import React, {FC} from "react";
 import style from './Login.module.sass'
 import LoginFormContainer from "./LoginForm/LoginFormContainer";
 
-const Login = () => {
+const Login:FC<{}> = () => {
     return (
         <>
             <h2 className={style.title}>Please, log in!</h2>

@@ -16,7 +16,7 @@ let initialState: InitialStateType = {
     isAuth: false
 }
 
-const authReducer = (state = initialState, action: any): InitialStateType => {
+const authReducer = (state = initialState, action: SetUserDataActionType): InitialStateType => {
     switch (action.type) {
         case SET_USER_DATA:
             return {

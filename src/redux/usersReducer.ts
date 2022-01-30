@@ -7,23 +7,16 @@ const CHANGE_CURRENT_PAGE = 'CHANGE_CURRENT_PAGE';
 const TOGGLE_FETCHING = 'TOGGLE_FETCHING';
 const TOGGLE_FOLLOWING = 'TOGGLE_FOLLOWING';
 
-type InitialStateType = {
-    users: Array<any>
-    totalCount: number
-    pageSize: number
-    currentPage: number
-    isFetching: boolean
-    isFollowing: Array<any>
-}
-
-let initialState: InitialStateType = {
-    users: [],
+let initialState = {
+    users: [] as Array<any>,
     totalCount: 0,
     pageSize: 10,
     currentPage: 1,
     isFetching: false,
-    isFollowing: []
+    isFollowing: [] as Array<number>
 }
+
+type InitialStateType = typeof initialState;
 
 const usersReducer = (state = initialState, action: any): InitialStateType => {
     switch (action.type) {
@@ -73,27 +66,22 @@ type ToggleFollowType = {
     type: typeof TOGGLE_FOLLOW;
     id: number
 }
-
 type SetUsersType = {
     type: typeof SET_USERS;
     users: Array<any>
 }
-
 type SetTotalCountType = {
     type: typeof SET_TOTAL_COUNT;
     totalCount: number
 }
-
 type ChangeCurrentPageType = {
     type: typeof CHANGE_CURRENT_PAGE;
     currentPage: number
 }
-
 type ToggleFetchingType = {
     type: typeof TOGGLE_FETCHING;
     isFetching: boolean
 }
-
 type ToggleFollowingType = {
     type: typeof TOGGLE_FOLLOWING;
     isFollowing: boolean;
@@ -111,34 +99,31 @@ export const toggleFollowing = (isFollowing: boolean, id: number): ToggleFollowi
 
 // Redux Thunks
 
-export const getUsersThunk = (currentPage: number, pageSize: number) => {
-    return (dispatch) => {
-        dispatch(toggleFetching(true));
-        usersAPI.requestUsers(currentPage, pageSize).then(data => {
-            dispatch(toggleFetching(false));
-            dispatch(changeCurrentPage(currentPage))
-            dispatch(setUsers(data.items));
-            dispatch(setTotalCount(data.totalCount));
-        })
-    }
+export const getUsersThunk = (currentPage: number, pageSize: number) => (dispatch: any) => {
+    dispatch(toggleFetching(true));
+    usersAPI.requestUsers(currentPage, pageSize).then(data => {
+        dispatch(toggleFetching(false));
+        dispatch(changeCurrentPage(currentPage))
+        dispatch(setUsers(data.items));
+        dispatch(setTotalCount(data.totalCount));
+    })
 }
 
-export const toggleFollowThunk = (id, isFollow) => {
-    return (dispatch) => {
-        dispatch(toggleFollowing(true, id));
-        if (isFollow) {
-            followAPI.followUser(id).then(data => {
-                if (data.resultCode === 0) {
-                    dispatch(toggleFollow(id))
-                }})
-        } else {
-            followAPI.unfollowUser(id).then(data => {
-                if (data.resultCode === 0) {
-                    dispatch(toggleFollow(id))
-                }
-            })
-        }
-        dispatch(toggleFollowing(false, id));
-}}
+export const toggleFollowThunk = (id: number, isFollow: boolean) => (dispatch: any) => {
+    dispatch(toggleFollowing(true, id));
+    if (isFollow) {
+        followAPI.followUser(id).then(data => {
+            if (data.resultCode === 0) {
+                dispatch(toggleFollow(id))
+            }})
+    } else {
+        followAPI.unfollowUser(id).then(data => {
+            if (data.resultCode === 0) {
+                dispatch(toggleFollow(id))
+            }
+        })
+    }
+    dispatch(toggleFollowing(false, id));
+}
 
 export default usersReducer;
