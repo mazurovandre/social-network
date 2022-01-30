@@ -8,3 +8,11 @@ export type MessageType = {
     text: string
     isOutcome: boolean
 }
+
+export type UserType = { // for UsersReducers
+    id: number
+    name: string
+    status: string | null
+    photos: {large: null | string, small: null | string}
+    followed: boolean
+}

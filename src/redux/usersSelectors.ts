@@ -1,10 +1,11 @@
 import {createSelector} from "reselect";
+import {AppStateType} from "./redux-store";
 
-const getUsersReselect = (state: any) => state.usersPage.users;
-const getUsersTotalCountReselect = (state: any) => state.usersPage.totalCount;
-const getUsersPageSizeReselect = (state: any) => state.usersPage.pageSize;
-const getUsersCurrentPageReselect = (state: any) => state.usersPage.currentPage;
-const getUsersIsFetchingReselect = (state: any) => state.usersPage.isFetching;
+const getUsersReselect = (state: AppStateType) => state.usersPage.users;
+const getUsersTotalCountReselect = (state: AppStateType) => state.usersPage.totalCount;
+const getUsersPageSizeReselect = (state: AppStateType) => state.usersPage.pageSize;
+const getUsersCurrentPageReselect = (state: AppStateType) => state.usersPage.currentPage;
+const getUsersIsFetchingReselect = (state: AppStateType) => state.usersPage.isFetching;
 
 // Reselect lib:
 

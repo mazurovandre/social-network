@@ -12,13 +12,31 @@ import {
     getUsersCurrentPage,
     getUsersIsFetching,
 } from "../../redux/usersSelectors";
+import {AppStateType} from "../../redux/redux-store";
+import {UserType} from "../../types/types";
 
-class UsersContainer extends React.Component {
+type UsersContainerType = MapStateToPropsType & MapDispatchToPropsType & OwnPropsType
+
+interface MapStateToPropsType {
+    users: Array<UserType>
+    totalCount: number
+    pageSize: number
+    currentPage: number
+    isFetching: boolean
+}
+
+interface MapDispatchToPropsType {
+    getUsersThunk: (currentPage: number, pageSize: number) => void
+}
+
+interface OwnPropsType {}
+
+class UsersContainer extends React.Component<UsersContainerType> {
     componentDidMount() {
         this.props.getUsersThunk(this.props.currentPage, this.props.pageSize);
     }
 
-    changeCurrentPage = (currentPage) => {
+    changeCurrentPage = (currentPage: number) => {
         this.props.getUsersThunk(currentPage, this.props.pageSize);
     }
 
@@ -28,14 +46,14 @@ class UsersContainer extends React.Component {
                    pageSize={this.props.pageSize}
                    currentPage={this.props.currentPage}
                    users={this.props.users}
-                   toggleFollow={this.props.toggleFollow}
+                   // toggleFollow={this.props.toggleFollow}
                    changeCurrentPage={this.changeCurrentPage} />
             {this.props.isFetching && <Preloader />}
         </>
     }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {
         users: getUsers(state),
         totalCount: getUsersTotalCount(state),
@@ -45,5 +63,7 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default compose(connect(mapStateToProps, {getUsersThunk}), withAuthRedirectComponent)(UsersContainer)
+export default compose(
+    connect<MapStateToPropsType, MapDispatchToPropsType, OwnPropsType, AppStateType>
+    (mapStateToProps, {getUsersThunk}), withAuthRedirectComponent)(UsersContainer)
 

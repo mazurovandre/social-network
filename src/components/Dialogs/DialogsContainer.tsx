@@ -4,14 +4,18 @@ import withAuthRedirectComponent from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
 import {DialogType} from '../../types/types'
 import {MessageType} from '../../types/types'
+import {AppStateType} from "../../redux/redux-store";
 
-export interface mapStateToPropsType {
+export interface MapStateToPropsType {
     dialogsData: Array<DialogType>
     dialogsMessages: Array<MessageType>
     isAuth: boolean
 }
 
-const mapStateToProps = (state: any): mapStateToPropsType => {
+interface MapDispatchToPropsType {}
+interface OwnProps {}
+
+const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {
         dialogsData: state.dialogsPage.dialogsData,
         dialogsMessages: state.dialogsPage.dialogsMessages,
@@ -19,4 +23,4 @@ const mapStateToProps = (state: any): mapStateToPropsType => {
     }
 }
 
-export default compose(connect(mapStateToProps, {}), withAuthRedirectComponent)(Dialogs);
+export default compose(connect<MapStateToPropsType, MapDispatchToPropsType, OwnProps, AppStateType>(mapStateToProps, {}), withAuthRedirectComponent)(Dialogs);

@@ -1,4 +1,5 @@
 import {followAPI, usersAPI} from "../api/api";
+import {UserType} from "../types/types";
 
 const TOGGLE_FOLLOW = 'TOGGLE_FOLLOW';
 const SET_USERS = 'SET_USERS';
@@ -8,7 +9,7 @@ const TOGGLE_FETCHING = 'TOGGLE_FETCHING';
 const TOGGLE_FOLLOWING = 'TOGGLE_FOLLOWING';
 
 let initialState = {
-    users: [] as Array<any>,
+    users: [] as Array<UserType>,
     totalCount: 0,
     pageSize: 10,
     currentPage: 1,
@@ -25,8 +26,10 @@ const usersReducer = (state = initialState, action: any): InitialStateType => {
                 ...state,
                 users: [...state.users]
             };
-            const targetUser = newState.users.find(user => user.id === action.id);
-            targetUser.followed = !targetUser.followed
+            const targetUser: UserType | undefined = newState.users.find(user => user.id === action.id);
+            if (targetUser !== undefined) {
+                targetUser.followed = !targetUser.followed
+            }
             return newState;
         case SET_USERS:
             return {

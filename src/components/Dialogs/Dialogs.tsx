@@ -5,7 +5,7 @@ import Message from "./Message/Message";
 import MessageInputContainer from "./MessageInput/MessageInputContainer";
 import Login from "../Login/Login";
 import {Routes, Route} from 'react-router-dom';
-import {mapStateToPropsType as DialogsProps} from "./DialogsContainer";
+import {MapStateToPropsType as DialogsProps} from "./DialogsContainer";
 
 
 const Dialogs:FC<DialogsProps> = ({dialogsData, dialogsMessages, isAuth}) => {

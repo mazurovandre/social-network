@@ -1,10 +1,18 @@
-import React from "react";
+import React, {FC} from "react";
 import style from './Users.module.sass';
 import UserContainer from "./User/UserContainer";
 import Paginator from "../common/Paginator/Paginator";
+import {UserType} from "../../types/types";
 
-const Users = (props) => {
+interface UsersProps {
+    totalCount: number
+    pageSize: number
+    currentPage: number
+    changeCurrentPage: (currentPage: number) => void
+    users: Array<UserType>
+}
 
+const Users:FC<UsersProps> = (props) => {
     return (
         <>
             <ul className={style.list}>
