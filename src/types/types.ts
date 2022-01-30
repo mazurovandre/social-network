@@ -16,3 +16,17 @@ export type UserType = { // for UsersReducers
     photos: {large: null | string, small: null | string}
     followed: boolean
 }
+
+export type UserInfoType = {
+    aboutMe: string | null
+    fullName: string
+    lookingForAJob: boolean
+    lookingForAJobDescription: string | null
+    photos: {large: null | string, small: null | string}
+    userId: number
+}
+
+export type ProfilePropsType = {
+    profile: UserInfoType
+    status: string
+}

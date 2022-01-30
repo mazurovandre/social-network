@@ -1,7 +1,6 @@
 import React from "react";
 import './App.sass';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
-
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
@@ -15,6 +14,7 @@ import {connect} from "react-redux";
 import {initializeThunk} from "./redux/appReducer.ts";
 import Preloader from "./components/common/Preloader/Preloader";
 import Sidebar from "./components/Sidebar/Sidebar";
+import Profile from "./components/Profile/Profile";
 
 class App extends React.Component {
 

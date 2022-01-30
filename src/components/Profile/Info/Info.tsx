@@ -1,23 +1,25 @@
-import React from "react";
+import React, {FC} from "react";
 import style from './Info.module.sass';
-// import bg from "../../../images/post.jpg"
 import avatar from "../../../images/avatar.jpg"
 import Preloader from "../../common/Preloader/Preloader";
 import InfoStatus from "./InfoStatus/InfoStatus";
+import {InfoProps} from "./InfoContainer";
 
-const Info = (props) => {
-    if (!props.profile) {
+
+
+const Info:FC<InfoProps> = ({profile, status, updateUserStatusThunk}) => {
+    if (!profile) {
         return <Preloader />
     }
     return (
             <div className={style.info}>
                 <div className={style.description}>
                     <div className={style.avatar}>
-                        <img src={props.profile.photos.small ? props.profile.photos.small : avatar} alt="avatar"/>
+                        <img src={profile.photos.small ? profile.photos.small : avatar} alt="avatar"/>
                     </div>
                     <div className={style.about}>
-                        <h2 className={style.title}>{props.profile.fullName}</h2>
-                        <InfoStatus status={props.status} updateStatus={props.updateUserStatusThunk}/>
+                        <h2 className={style.title}>{profile.fullName}</h2>
+                        <InfoStatus status={status} updateStatus={updateUserStatusThunk}/>
                     </div>
                 </div>
             </div>

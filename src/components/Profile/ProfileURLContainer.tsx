@@ -2,12 +2,11 @@ import React, {FC} from "react";
 import {useParams} from "react-router-dom";
 import ProfileContainer from "./ProfileContainer";
 
-
-
 const ProfileURLContainer:FC<{}> = () => {
-    const {userId} = useParams<{userId?: string}>()
+    const {userId} = useParams<{userId: string}>()
 
-    return <ProfileContainer userId={userId}/>
+    // @ts-ignore
+    return <ProfileContainer userId={Number(userId)}/>
 }
 
 export default ProfileURLContainer

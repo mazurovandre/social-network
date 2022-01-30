@@ -99,9 +99,9 @@ export const getUserThunk = (id: number) => (dispatch: any): void => {
 }
 
 export const getUserStatusThunk = (userId: number) => (dispatch: any): void => {
-    if (userId === undefined) {
-        userId = 21586
-    }
+    // if (userId === undefined) {
+    //     userId = 21586
+    // }
     profileAPI.getStatus(userId).then(response => {
         dispatch(setStatus(response.data))
     })

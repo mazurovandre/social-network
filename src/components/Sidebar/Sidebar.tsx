@@ -15,7 +15,7 @@ const Sidebar:FC<{}> = () => {
                         <NavLink to="/dialogs"
                                  className={link => link.isActive ? `${style.link} ${style.active}` : style.link}>Messages</NavLink>
                     </li>
-                    <li className={style.item}>
+                    <li className={`${style.item} ${style.disabled}`}>
                         <NavLink to="/news"
                                  className={link => link.isActive ? `${style.link} ${style.active}` : style.link}>News</NavLink>
                     </li>
