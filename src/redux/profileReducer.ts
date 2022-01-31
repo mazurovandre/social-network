@@ -6,7 +6,7 @@ const ON_POST_CHANGE = 'ON-POST-CHANGE';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const SET_STATUS = 'SET_STATUS';
 
-type postsDataType = {
+export type postsDataType = {
     id: number;
     message: string;
     likesCount: number
