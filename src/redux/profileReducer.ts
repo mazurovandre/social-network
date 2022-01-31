@@ -1,4 +1,5 @@
 import {profileAPI} from "../api/api";
+import {ResultCodes} from "../types/types";
 
 const ADD_POST = 'ADD-POST';
 const ON_POST_CHANGE = 'ON-POST-CHANGE';
@@ -109,7 +110,7 @@ export const getUserStatusThunk = (userId: number) => (dispatch: any): void => {
 
 export const updateUserStatusThunk = (status: string) => (dispatch: any): void => {
     profileAPI.updateStatus(status).then((response: any) => {
-        if (response.resultCode === 0) {
+        if (response.resultCode === ResultCodes.Success) {
             dispatch(setStatus(status))
         }
     })

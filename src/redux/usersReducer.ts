@@ -1,5 +1,7 @@
 import {followAPI, usersAPI} from "../api/api";
-import {UserType} from "../types/types";
+import {ResultCodes, UserType} from "../types/types";
+import {ThunkAction} from "redux-thunk";
+import {AppStateType} from "./redux-store";
 
 const TOGGLE_FOLLOW = 'TOGGLE_FOLLOW';
 const SET_USERS = 'SET_USERS';
@@ -19,7 +21,7 @@ let initialState = {
 
 type InitialStateType = typeof initialState;
 
-const usersReducer = (state = initialState, action: any): InitialStateType => {
+const usersReducer = (state = initialState, action: ActionType): InitialStateType => {
     switch (action.type) {
         case TOGGLE_FOLLOW:
             const newState = {
@@ -65,6 +67,8 @@ const usersReducer = (state = initialState, action: any): InitialStateType => {
 
 // Types for Action Creators
 
+type ActionType = ToggleFollowType | SetUsersType | SetTotalCountType | ChangeCurrentPageType | ToggleFetchingType | ToggleFollowingType
+
 type ToggleFollowType = {
     type: typeof TOGGLE_FOLLOW;
     id: number
@@ -102,7 +106,9 @@ export const toggleFollowing = (isFollowing: boolean, id: number): ToggleFollowi
 
 // Redux Thunks
 
-export const getUsersThunk = (currentPage: number, pageSize: number) => (dispatch: any) => {
+type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionType>
+
+export const getUsersThunk = (currentPage: number, pageSize: number): ThunkType => async dispatch => {
     dispatch(toggleFetching(true));
     usersAPI.requestUsers(currentPage, pageSize).then(data => {
         dispatch(toggleFetching(false));
@@ -112,16 +118,16 @@ export const getUsersThunk = (currentPage: number, pageSize: number) => (dispatc
     })
 }
 
-export const toggleFollowThunk = (id: number, isFollow: boolean) => (dispatch: any) => {
+export const toggleFollowThunk = (id: number, isFollow: boolean): ThunkType => async dispatch => {
     dispatch(toggleFollowing(true, id));
     if (isFollow) {
         followAPI.followUser(id).then(data => {
-            if (data.resultCode === 0) {
+            if (data.resultCode === ResultCodes.Success) {
                 dispatch(toggleFollow(id))
             }})
     } else {
         followAPI.unfollowUser(id).then(data => {
-            if (data.resultCode === 0) {
+            if (data.resultCode === ResultCodes.Success) {
                 dispatch(toggleFollow(id))
             }
         })

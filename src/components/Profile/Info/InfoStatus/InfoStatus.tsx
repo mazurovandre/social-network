@@ -8,12 +8,13 @@ type InfoStatusProps = {
 
 const InfoStatus:FC<InfoStatusProps> = ({status, updateStatus}) => {
 
+    console.log(status)
     let [editMode, setEditMode] = useState(false);
-    let [localStatus, setLocalStatus] = useState(status || '');
+    let [localStatus, setLocalStatus] = useState(status);
 
     useEffect(() => {
         setLocalStatus(localStatus);
-    }, [localStatus])
+    }, [localStatus, status])
 
     const enableEditMode = () => {
         setEditMode(true);

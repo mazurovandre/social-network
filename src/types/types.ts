@@ -30,3 +30,9 @@ export type ProfilePropsType = {
     profile: UserInfoType
     status: string
 }
+
+export enum ResultCodes {
+    Success = 0,
+    Fail = 1,
+    CaptchaRequired = 10
+}

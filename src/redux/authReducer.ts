@@ -1,4 +1,7 @@
 import {authAPI} from "../api/api";
+import {ResultCodes} from "../types/types";
+import {ThunkAction} from "redux-thunk";
+import {AppStateType} from "./redux-store";
 
 const SET_USER_DATA = 'SET_USER_DATA';
 
@@ -40,26 +43,26 @@ type SetUserDataActionType = {
     data: SetUserDataActionDataType
 }
 
-export const setUserData = (
-    userId: number | null,
-    login: string | null,
-    email: string | null,
-    isAuth: boolean): SetUserDataActionType => ({
+export const setUserData = (userId: number | null, login: string | null,
+    email: string | null, isAuth: boolean): SetUserDataActionType => ({
     type: SET_USER_DATA,
     data: {userId, email, login, isAuth}
 });
 
-export const authThunk = () => (dispatch: any) => {
+type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, SetUserDataActionType>
+
+
+export const authThunk = (): ThunkType => async dispatch => {
     return authAPI.authMe().then(data => {
-        if (data.resultCode === 0) {
+        if (data.resultCode === ResultCodes.Success) {
             dispatch(setUserData(data.data.id, data.data.login, data.data.email, true));
         }
     })
 }
 
-export const loginThunk = ({email, password, rememberMe}: any, setErrorStatus: any) => (dispatch: any) => {
+export const loginThunk = ({email, password, rememberMe}: any, setErrorStatus: any): ThunkType => async dispatch => {
     authAPI.login(email, password, rememberMe = true).then(data => {
-        if (data.resultCode === 0) {
+        if (data.resultCode === ResultCodes.Success) {
             dispatch(authThunk());
             setErrorStatus('')
         } else {
@@ -68,9 +71,9 @@ export const loginThunk = ({email, password, rememberMe}: any, setErrorStatus: a
     })
 }
 
-export const logoutThunk = () => (dispatch: any) => {
+export const logoutThunk = (): ThunkType => async dispatch => {
     authAPI.logout().then(data => {
-        if (data.resultCode === 0) {
+        if (data.resultCode === ResultCodes.Success) {
             dispatch(setUserData(null, null, null, false));
         } else {
             console.error('Failed to logoff from the server');

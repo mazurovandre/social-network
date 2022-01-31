@@ -11,6 +11,7 @@ const Info:FC<InfoProps> = ({profile, status, updateUserStatusThunk}) => {
     if (!profile) {
         return <Preloader />
     }
+    console.log("Info status", status)
     return (
             <div className={style.info}>
                 <div className={style.description}>
