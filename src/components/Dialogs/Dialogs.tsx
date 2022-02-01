@@ -1,4 +1,4 @@
-import React, {FC} from "react";
+import React, {FC, useEffect, useRef} from "react";
 import style from './Dialogs.module.sass';
 import DialogName from "./DialogName/DialogName";
 import Message from "./Message/Message";
@@ -11,6 +11,16 @@ import {MapStateToPropsType as DialogsProps} from "./DialogsContainer";
 const Dialogs:FC<DialogsProps> = ({dialogsData, dialogsMessages, isAuth}) => {
     const dialogs = dialogsData.map(person => <DialogName key={person.id} name={person.name} id={person.id}/>);
     const messages = dialogsMessages.map(message => <Message key={message.id} message={message.text} isOutcome={message.isOutcome}/>);
+
+    const messagesEndRef = useRef<null | HTMLLIElement>(null)
+
+    const scrollToBottom = (): void => {
+        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
+    }
+
+    useEffect(() => {
+        scrollToBottom()
+    }, [messages]);
 
     if (!isAuth) {
         return (
@@ -34,6 +44,7 @@ const Dialogs:FC<DialogsProps> = ({dialogsData, dialogsMessages, isAuth}) => {
                     <div className={style.messages_block}>
                         <ul className={style.messages_list}>
                             {messages}
+                            <li ref={messagesEndRef}/>
                         </ul>
                     </div>
                     <MessageInputContainer />

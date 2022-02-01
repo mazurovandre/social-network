@@ -1,5 +1,5 @@
 import axios from "axios";
-import { UserType } from "types/types";
+import {ResultCodes, UserType} from "types/types";
 
 // Users API: https://social-network.samuraijs.com/
 // API Doc: https://social-network.samuraijs.com/docs#users_get
@@ -17,19 +17,15 @@ type UsersAPIType = {
     totalCount: number
     error: string | null
 }
-type AuthMeAPIType = {
-    data: {
-        id: number
-        email: string
-        login: string
-    }
-    resultCode: number
+type ResponseAPIType<D = {}> = {
+    data: D
+    resultCode: ResultCodes
     messages: Array<string>
 }
-type ResponseAPIType = {
-    resultCode: number
-    messages: Array<string>
-    data: {}
+type AuthDataAPIType = {
+    id: number
+    email: string
+    login: string
 }
 type GetUserAPIType = {
     userId: number
@@ -60,7 +56,7 @@ export const usersAPI = {
 
 export const authAPI = {
     authMe() {
-        return instance.get<AuthMeAPIType>(`auth/me`).then(response => response.data)
+        return instance.get<ResponseAPIType<AuthDataAPIType>>(`auth/me`).then(response => response.data)
     },
     login(email: string, password: string, rememberMe = false) {
         return instance.post<ResponseAPIType>(`auth/login`, {email, password, rememberMe}).then(response => response.data)
