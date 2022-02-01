@@ -39,7 +39,7 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
     status: state.profilePage.status
 })
 
-export default compose(
+export default compose<React.ComponentType>(
     connect<MapStateToPropsType, MapDispatchToPropsType, OwnPropsType, AppStateType>
     (mapStateToProps,
     {getUserThunk, getUserStatusThunk, updateUserStatusThunk}),withAuthRedirectComponent)(ProfileContainer);
