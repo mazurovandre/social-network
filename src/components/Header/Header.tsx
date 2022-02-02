@@ -2,9 +2,9 @@ import React, {FC} from "react";
 import style from './Header.module.sass';
 import logo from '../../images/logo.svg';
 import {NavLink} from "react-router-dom"; // with import
-// import {HeaderProps} from './HeaderContainer'
+import {HeaderProps} from './HeaderContainer'
 
-const Header:FC<any> = ({login, isAuth, logoutThunk}) => {
+const Header:FC<HeaderProps> = ({login, isAuth, logoutThunk}) => {
   return (
       <header className={style.header}>
           <div className={style.logo}>

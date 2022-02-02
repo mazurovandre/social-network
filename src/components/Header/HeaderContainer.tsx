@@ -1,15 +1,22 @@
 import Header from "./Header";
 import {logoutThunk} from "../../redux/authReducer";
 import {connect} from "react-redux";
+import {AppStateType} from "../../redux/redux-store";
 
-export interface HeaderProps {
+export type HeaderProps = MapStateToPropsType & MapDispatchToPropsType
+
+type MapStateToPropsType = {
     isAuth: boolean
     login: string | null
 }
 
-const mapStateToProps = (state: any): HeaderProps => ({
+type MapDispatchToPropsType = {
+    logoutThunk: () => void
+}
+
+const mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
     isAuth: state.auth.isAuth,
     login: state.auth.login
 });
 
-export default connect(mapStateToProps, {logoutThunk})(Header);
+export default connect<MapStateToPropsType, MapDispatchToPropsType, {}, AppStateType>(mapStateToProps, {logoutThunk})(Header);

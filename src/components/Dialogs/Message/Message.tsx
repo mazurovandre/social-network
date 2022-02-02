@@ -1,7 +1,7 @@
 import React, {FC} from "react";
 import style from './Message.module.sass';
 
-interface MessageProps {
+type MessageProps = {
     message: string
     isOutcome: boolean
 }

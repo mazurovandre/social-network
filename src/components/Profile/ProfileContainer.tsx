@@ -4,13 +4,9 @@ import {connect} from "react-redux";
 import Profile from "./Profile";
 import withAuthRedirectComponent from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
-import {ProfilePropsType} from "../../types/types";
+import {ProfilePropsType as MapStateToPropsType} from "../../types/types";
 import {AppStateType} from "../../redux/redux-store";
 
-type MapStateToPropsType = LoginIdPropsType & ProfilePropsType
-type LoginIdPropsType = {
-    loginId: number | null
-}
 type MapDispatchToPropsType = {
     getUserThunk: (id: number) => void
     getUserStatusThunk: (userId: number) => void
@@ -21,12 +17,12 @@ type OwnPropsType = {
 }
 type ProfileContainerType = MapStateToPropsType & MapDispatchToPropsType & OwnPropsType
 
-const ProfileContainer:FC<ProfileContainerType> = (props) => {
+const ProfileContainer:FC<ProfileContainerType> = ({userId, getUserThunk, getUserStatusThunk}) => {
 
     useEffect(() => {
-        props.getUserThunk(props.userId || props.loginId as number);
-        props.getUserStatusThunk(props.userId || props.loginId as number)
-    }, [])
+        getUserThunk(userId);
+        getUserStatusThunk(userId)
+    }, [getUserThunk, getUserStatusThunk, userId])
 
     return (
         <Profile />
@@ -34,7 +30,6 @@ const ProfileContainer:FC<ProfileContainerType> = (props) => {
 };
 
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
-    loginId: state.auth.userId,
     profile: state.profilePage.profile,
     status: state.profilePage.status
 })

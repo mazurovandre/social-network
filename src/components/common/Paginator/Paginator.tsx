@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 import style from "./Paginator.module.sass"
 
-interface PaginatorType {
+type PaginatorType = {
     totalCount: number
     pageSize: number
     currentPage: number

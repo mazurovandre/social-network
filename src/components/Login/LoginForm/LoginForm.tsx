@@ -2,8 +2,9 @@ import React, {FC, useState} from "react";
 import style from './LoginForm.module.sass'
 import {Field, Form, Formik} from "formik";
 import * as Yup from 'yup';
+import {MapDispatchToPropsType as LoginFormType} from "./LoginFormContainer";
 
-const LoginForm:FC<any> = ({loginThunk}) => {
+const LoginForm:FC<LoginFormType> = ({loginThunk}) => {
 
     const [errorStatus, setErrorStatus] = useState('');
 

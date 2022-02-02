@@ -7,13 +7,10 @@ import {MessageType} from '../../types/types'
 import {AppStateType} from "../../redux/redux-store";
 import React from "react";
 
-export interface MapStateToPropsType {
+export type MapStateToPropsType = {
     dialogsData: Array<DialogType>
     dialogsMessages: Array<MessageType>
 }
-
-interface MapDispatchToPropsType {}
-interface OwnProps {}
 
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {
@@ -22,4 +19,4 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     }
 }
 
-export default compose<React.ComponentType>(connect<MapStateToPropsType, MapDispatchToPropsType, OwnProps, AppStateType>(mapStateToProps, {}), withAuthRedirectComponent)(Dialogs);
+export default compose<React.ComponentType>(connect<MapStateToPropsType, {}, {}, AppStateType>(mapStateToProps, {}), withAuthRedirectComponent)(Dialogs);

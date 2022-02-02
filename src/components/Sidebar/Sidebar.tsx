@@ -2,7 +2,7 @@ import React, {FC} from "react";
 import style from './Sidebar.module.sass';
 import {NavLink} from "react-router-dom";
 
-const Sidebar:FC<{}> = () => {
+const Sidebar:FC = () => {
     return (
         <aside className={style.sidebar}>
             <nav>

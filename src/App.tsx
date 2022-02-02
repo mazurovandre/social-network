@@ -12,22 +12,21 @@ import Preloader from "./components/common/Preloader/Preloader";
 import Sidebar from "./components/Sidebar/Sidebar";
 import {AppStateType} from "./redux/redux-store";
 import {withSuspense} from "./hoc/withSuspense";
+import withUserID from "./hoc/withUserID";
 
 const DialogsContainer = React.lazy(() => import("./components/Dialogs/DialogsContainer"))
 const UsersContainer = React.lazy(() => import("./components/Users/UsersContainer"))
 const ProfileContainer = React.lazy(() => import("./components/Profile/ProfileContainer"))
-const ProfileURLContainer = React.lazy(() => import("./components/Profile/ProfileURLContainer"))
 
 const LazyDialogsContainer = withSuspense(DialogsContainer);
 const LazyUsersContainer = withSuspense(UsersContainer);
-const LazyProfileContainer = withSuspense(ProfileContainer);
-const LazyProfileURLContainer = withSuspense(ProfileURLContainer);
+const LazyProfileContainer = withSuspense(withUserID(ProfileContainer));
 
 const App:FC<MapStateToPropsType & MapDispatchToPropsType> = ({isInitialized, initializeThunk}) => {
 
     useEffect(() => {
         initializeThunk();
-    }, [])
+    }, )
 
     if (!isInitialized) {
         return <Preloader/>
@@ -40,7 +39,7 @@ const App:FC<MapStateToPropsType & MapDispatchToPropsType> = ({isInitialized, in
                 <main className="main-content">
                     <Routes>
                         <Route path="*" element={<LazyProfileContainer/>}/>
-                        <Route path="/profile/:userId/*" element={<LazyProfileURLContainer/>}/>
+                        <Route path="/profile/:ID/*" element={<LazyProfileContainer/>}/>
                         <Route path="/dialogs/*" element={<LazyDialogsContainer/>}/>
                         <Route path="/news" element={<News/>}/>
                         <Route path="/music" element={<Music/>}/>
