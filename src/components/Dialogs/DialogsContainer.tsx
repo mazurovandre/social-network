@@ -10,7 +10,6 @@ import React from "react";
 export interface MapStateToPropsType {
     dialogsData: Array<DialogType>
     dialogsMessages: Array<MessageType>
-    isAuth: boolean
 }
 
 interface MapDispatchToPropsType {}
@@ -19,8 +18,7 @@ interface OwnProps {}
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {
         dialogsData: state.dialogsPage.dialogsData,
-        dialogsMessages: state.dialogsPage.dialogsMessages,
-        isAuth: state.auth.isAuth
+        dialogsMessages: state.dialogsPage.dialogsMessages
     }
 }
 

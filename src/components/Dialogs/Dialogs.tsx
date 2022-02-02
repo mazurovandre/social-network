@@ -3,12 +3,10 @@ import style from './Dialogs.module.sass';
 import DialogName from "./DialogName/DialogName";
 import Message from "./Message/Message";
 import MessageInputContainer from "./MessageInput/MessageInputContainer";
-import Login from "../Login/Login";
-import {Routes, Route} from 'react-router-dom';
 import {MapStateToPropsType as DialogsProps} from "./DialogsContainer";
 
 
-const Dialogs:FC<DialogsProps> = ({dialogsData, dialogsMessages, isAuth}) => {
+const Dialogs:FC<DialogsProps> = ({dialogsData, dialogsMessages}) => {
     const dialogs = dialogsData.map(person => <DialogName key={person.id} name={person.name} id={person.id}/>);
     const messages = dialogsMessages.map(message => <Message key={message.id} message={message.text} isOutcome={message.isOutcome}/>);
 
@@ -21,14 +19,6 @@ const Dialogs:FC<DialogsProps> = ({dialogsData, dialogsMessages, isAuth}) => {
     useEffect(() => {
         scrollToBottom()
     }, [messages]);
-
-    if (!isAuth) {
-        return (
-            <Routes>
-                <Route path="/" element={<Login />} />
-            </Routes>
-        )
-    }
 
     return (
         <div className={style.dialogs}>
