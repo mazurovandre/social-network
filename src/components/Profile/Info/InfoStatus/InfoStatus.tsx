@@ -7,8 +7,6 @@ type InfoStatusProps = {
 
 const InfoStatus:FC<InfoStatusProps> = ({status, updateStatus}) => {
 
-    console.log("status: ", status)
-
     let [editMode, setEditMode] = useState(false);
     let [localStatus, setLocalStatus] = useState(status);
 

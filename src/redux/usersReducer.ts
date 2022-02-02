@@ -19,7 +19,7 @@ let initialState = {
     isFollowing: [] as Array<number>
 }
 
-type InitialStateType = typeof initialState;
+export type InitialStateType = typeof initialState;
 
 const usersReducer = (state = initialState, action: ActionType): InitialStateType => {
     switch (action.type) {
