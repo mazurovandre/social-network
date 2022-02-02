@@ -3,8 +3,9 @@ import Info from "./Info";
 import {updateUserStatusThunk} from "../../../redux/profileReducer";
 import {AppStateType} from "../../../redux/redux-store";
 import {UserInfoType} from "../../../types/types";
+import {ProfileType} from "../Profile";
 
-export type InfoProps = MapStateToPropsType & MapDispatchToPropsType;
+export type InfoProps = MapStateToPropsType & MapDispatchToPropsType & ProfileType;
 
 type MapStateToPropsType = {
     profile: UserInfoType

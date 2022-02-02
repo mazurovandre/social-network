@@ -61,7 +61,7 @@ const profileReducer = (state = initialState, action: ActionType): InitialStateT
         case SET_STATUS:
             return {
                 ...state,
-                status: action.status === null ? 'Write your status' : action.status
+                status: action.status === null ? ' ' : action.status
             }
         default:
             return state;
@@ -70,10 +70,10 @@ const profileReducer = (state = initialState, action: ActionType): InitialStateT
 
 type ActionType = AddPostActionCreatorType | OnPostChangeActionCreatorType | SetUserProfileType | SetStatusType
 
-type AddPostActionCreatorType = {
+export type AddPostActionCreatorType = {
     type: typeof ADD_POST
 }
-type OnPostChangeActionCreatorType = {
+export type OnPostChangeActionCreatorType = {
     type: typeof ON_POST_CHANGE;
     newText: string
 }

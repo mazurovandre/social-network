@@ -7,7 +7,7 @@ import {InfoProps} from "./InfoContainer";
 
 
 
-const Info:FC<InfoProps> = ({profile, status, updateUserStatusThunk}) => {
+const Info:FC<InfoProps> = ({profile, isMyPage, status, updateUserStatusThunk}) => {
     if (!profile) {
         return <Preloader />
     }
@@ -19,7 +19,10 @@ const Info:FC<InfoProps> = ({profile, status, updateUserStatusThunk}) => {
                     </div>
                     <div className={style.about}>
                         <h2 className={style.title}>{profile.fullName}</h2>
-                        <InfoStatus status={status} updateStatus={updateUserStatusThunk}/>
+                        <div className={style.status}>
+                            {isMyPage ? <InfoStatus status={status} updateStatus={updateUserStatusThunk}/> :
+                                <h5 className={style.status}>{status}</h5> }
+                        </div>
                     </div>
                 </div>
             </div>
