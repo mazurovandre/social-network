@@ -61,7 +61,7 @@ const profileReducer = (state = initialState, action: ActionType): InitialStateT
         case SET_STATUS:
             return {
                 ...state,
-                status: action.status === null ? ' ' : action.status
+                status: action.status
             }
         default:
             return state;
@@ -100,9 +100,6 @@ export const getUserThunk = (id: number) => (dispatch: any): void => {
 }
 
 export const getUserStatusThunk = (userId: number) => (dispatch: any): void => {
-    // if (userId === undefined) {
-    //     userId = 21586
-    // }
     profileAPI.getStatus(userId).then(response => {
         dispatch(setStatus(response.data))
     })
@@ -110,7 +107,7 @@ export const getUserStatusThunk = (userId: number) => (dispatch: any): void => {
 
 export const updateUserStatusThunk = (status: string) => (dispatch: any): void => {
     profileAPI.updateStatus(status).then((response: any) => {
-        if (response.resultCode === ResultCodes.Success) {
+        if (response.data.resultCode === ResultCodes.Success) {
             dispatch(setStatus(status))
         }
     })

@@ -4,15 +4,14 @@ import {connect} from "react-redux";
 import Profile from "./Profile";
 import withAuthRedirectComponent from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
-// import {ProfilePropsType as MapStateToPropsType, UserInfoType} from "../../types/types";
-import {AppStateType} from "../../redux/redux-store";
 import {UserInfoType} from "../../types/types";
-
+import {AppStateType} from "../../redux/redux-store";
 
 type MapStateToPropsType = {
-    loginId: number | null
+    loginId: number | null,
     profile: UserInfoType
 }
+
 type MapDispatchToPropsType = {
     getUserThunk: (id: number) => void
     getUserStatusThunk: (userId: number) => void

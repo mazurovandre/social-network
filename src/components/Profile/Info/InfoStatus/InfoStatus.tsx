@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useState} from "react";
+import React, {ChangeEvent, FC, useEffect, useState} from "react";
 
 type InfoStatusProps = {
     status: string
@@ -6,6 +6,8 @@ type InfoStatusProps = {
 }
 
 const InfoStatus:FC<InfoStatusProps> = ({status, updateStatus}) => {
+
+    console.log("status: ", status)
 
     let [editMode, setEditMode] = useState(false);
     let [localStatus, setLocalStatus] = useState(status);
@@ -23,7 +25,7 @@ const InfoStatus:FC<InfoStatusProps> = ({status, updateStatus}) => {
         updateStatus(localStatus);
     };
 
-    const onStatusChange = (e: any) => {
+    const onStatusChange = (e: ChangeEvent<HTMLInputElement>) => {
         setLocalStatus(e.currentTarget.value);
     }
 

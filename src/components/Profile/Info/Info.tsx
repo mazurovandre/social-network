@@ -8,6 +8,9 @@ import {InfoProps} from "./InfoContainer";
 
 
 const Info:FC<InfoProps> = ({profile, isMyPage, status, updateUserStatusThunk}) => {
+
+    console.log(status)
+
     if (!profile) {
         return <Preloader />
     }
