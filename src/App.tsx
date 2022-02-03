@@ -1,22 +1,18 @@
 import React, {FC, useEffect} from "react";
-import './App.sass';
+import style from './App.module.sass';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
-import News from "./components/News/News";
-import Music from "./components/Music/Music";
-import Settings from "./components/Settings/Settings";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from "./components/Login/Login";
 import {connect} from "react-redux";
 import {initializeThunk} from "./redux/appReducer";
 import Preloader from "./components/common/Preloader/Preloader";
-import Sidebar from "./components/Sidebar/Sidebar";
 import {AppStateType} from "./redux/redux-store";
 import {withSuspense} from "./hoc/withSuspense";
 import withUserID from "./hoc/withUserID";
 import 'antd/dist/antd.css';
 import {Layout} from 'antd';
 
-const {Header, Sider, Content} = Layout;
+const {Header, Content} = Layout;
 
 
 const DialogsContainer = React.lazy(() => import("./components/Dialogs/DialogsContainer"))
@@ -38,29 +34,21 @@ const App: FC<MapStateToPropsType & MapDispatchToPropsType> = ({isInitialized, i
     }
     return (
         <BrowserRouter>
-            <Layout>
-                <Header>
+            <Layout style={{backgroundColor: '#EDEEF0'}}>
+                <Header className={style.header} style={{padding: '0px'}}>
                     <HeaderContainer/>
                 </Header>
-                <Layout>
-                    <Sider>
-                        <Sidebar/>
-                    </Sider>
-
-                    <Content>
+                <Layout style={{backgroundColor: '#EDEEF0'}}>
+                    <Content className={style.main_content}>
                         <Routes>
                             <Route path="*" element={<LazyProfileContainer/>}/>
                             <Route path="/profile/:ID/*" element={<LazyProfileContainer/>}/>
                             <Route path="/dialogs/*" element={<LazyDialogsContainer/>}/>
-                            <Route path="/news" element={<News/>}/>
-                            <Route path="/music" element={<Music/>}/>
-                            <Route path="/settings" element={<Settings/>}/>
                             <Route path="/users/*" element={<LazyUsersContainer/>}/>
                             <Route path="/login/*" element={<Login/>}/>
                         </Routes>
                     </Content>
                 </Layout>
-
             </Layout>
         </BrowserRouter>
 

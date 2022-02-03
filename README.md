@@ -2,8 +2,8 @@
 ----------
 
 Проект был начат на курсе "Путь самурая" на YouTube. 
-[Плейлист Youtube](https://www.youtube.com/playlist?list=PLcvhF2Wqh7DNVy1OCUpG3i5lyxyBWhGZ8)
-Работающее демо будет лежать на бесплатном хостинге до середины апреля.
+[Плейлист Youtube](https://www.youtube.com/playlist?list=PLcvhF2Wqh7DNVy1OCUpG3i5lyxyBWhGZ8) <br/>
+Работающее демо будет лежать на бесплатном хостинге до середины апреля. (Необходимо войти как гость)
 [Демо](http://f0629276.xsph.ru/)
 
 ##### На проекте были использованы технологии:
