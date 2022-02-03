@@ -13,7 +13,7 @@ const Paginator: FC<PaginatorType> = ({totalCount, pageSize, currentPage, change
     const totalPages = Math.ceil(totalCount / pageSize);
     const maxPortionNum = Math.ceil(totalCount / (pageSize * portionSize));
     const [portionNum, setPortionNum] = useState(1);
-    const [pages, setPages] = useState(createPagesArray(1));
+    const [pages, setPages] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
     useEffect(() => {
         setPages(createPagesArray(portionNum))
     }, [portionNum])

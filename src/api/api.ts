@@ -17,7 +17,7 @@ type UsersAPIType = {
     totalCount: number
     error: string | null
 }
-type ResponseAPIType<D = {}> = {
+export type ResponseAPIType<D = {}> = {
     data: D
     resultCode: ResultCodes
     messages: Array<string>

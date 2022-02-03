@@ -13,6 +13,11 @@ import Sidebar from "./components/Sidebar/Sidebar";
 import {AppStateType} from "./redux/redux-store";
 import {withSuspense} from "./hoc/withSuspense";
 import withUserID from "./hoc/withUserID";
+import 'antd/dist/antd.css';
+import {Layout} from 'antd';
+
+const {Header, Sider, Content} = Layout;
+
 
 const DialogsContainer = React.lazy(() => import("./components/Dialogs/DialogsContainer"))
 const UsersContainer = React.lazy(() => import("./components/Users/UsersContainer"))
@@ -22,34 +27,43 @@ const LazyDialogsContainer = withSuspense(DialogsContainer);
 const LazyUsersContainer = withSuspense(UsersContainer);
 const LazyProfileContainer = withSuspense(withUserID(ProfileContainer));
 
-const App:FC<MapStateToPropsType & MapDispatchToPropsType> = ({isInitialized, initializeThunk}) => {
+const App: FC<MapStateToPropsType & MapDispatchToPropsType> = ({isInitialized, initializeThunk}) => {
 
     useEffect(() => {
         initializeThunk();
-    }, )
+    },)
 
     if (!isInitialized) {
         return <Preloader/>
     }
     return (
         <BrowserRouter>
-            <div className='app-wrapper'>
-                <HeaderContainer/>
-                <Sidebar/>
-                <main className="main-content">
-                    <Routes>
-                        <Route path="*" element={<LazyProfileContainer/>}/>
-                        <Route path="/profile/:ID/*" element={<LazyProfileContainer/>}/>
-                        <Route path="/dialogs/*" element={<LazyDialogsContainer/>}/>
-                        <Route path="/news" element={<News/>}/>
-                        <Route path="/music" element={<Music/>}/>
-                        <Route path="/settings" element={<Settings/>}/>
-                        <Route path="/users/*" element={<LazyUsersContainer/>}/>
-                        <Route path="/login/*" element={<Login/>}/>
-                    </Routes>
-                </main>
-            </div>
+            <Layout>
+                <Header>
+                    <HeaderContainer/>
+                </Header>
+                <Layout>
+                    <Sider>
+                        <Sidebar/>
+                    </Sider>
+
+                    <Content>
+                        <Routes>
+                            <Route path="*" element={<LazyProfileContainer/>}/>
+                            <Route path="/profile/:ID/*" element={<LazyProfileContainer/>}/>
+                            <Route path="/dialogs/*" element={<LazyDialogsContainer/>}/>
+                            <Route path="/news" element={<News/>}/>
+                            <Route path="/music" element={<Music/>}/>
+                            <Route path="/settings" element={<Settings/>}/>
+                            <Route path="/users/*" element={<LazyUsersContainer/>}/>
+                            <Route path="/login/*" element={<Login/>}/>
+                        </Routes>
+                    </Content>
+                </Layout>
+
+            </Layout>
         </BrowserRouter>
+
     )
 };
 

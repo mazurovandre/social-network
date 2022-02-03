@@ -9,14 +9,22 @@ const LoginForm:FC<LoginFormType> = ({loginThunk}) => {
     const [errorStatus, setErrorStatus] = useState('');
 
     const initialValues = {
-        email: 'mazurovandre@gmail.com',
-        password: 'kamasutra123'
+        email: '',
+        password: ''
     }
 
     const validationSchema = Yup.object({
         email: Yup.string().email('Invalid e-mail format').required('E-mail is required'),
         password: Yup.string().required('Password is required')
     })
+
+    const loginAsGuest = (e: any) => {
+        e.preventDefault()
+        loginThunk({
+            email: 'free@samuraijs.com',
+            password: 'free'
+        }, setErrorStatus)
+    }
 
     return (
         <Formik
@@ -43,7 +51,12 @@ const LoginForm:FC<LoginFormType> = ({loginThunk}) => {
                             {props.errors.password || errorStatus}
                         </p>
                     </div>
-                    <button type="submit" disabled={props.isSubmitting}>Log in</button>
+                    <div className={style.buttons}>
+                        <button className={style.login_btn} type="submit" disabled={props.isSubmitting}>Log in</button>
+                        <button className={style.guest_btn} onClick={loginAsGuest}
+                                disabled={props.isSubmitting}>Log in as Guest</button>
+                    </div>
+
                 </Form>
             )}
 
