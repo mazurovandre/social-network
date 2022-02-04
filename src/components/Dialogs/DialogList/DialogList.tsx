@@ -1,7 +1,6 @@
 import React, {FC} from "react";
 import {NavLink} from "react-router-dom";
-import {List} from "antd";
-import Item from "antd/lib/list/Item";
+import Menu from "antd/es/menu";
 
 type DialogsListProps = {
     contacts: any
@@ -10,15 +9,18 @@ type DialogsListProps = {
 
 const DialogList:FC<DialogsListProps> = ({contacts, changeDialog}) => {
 
-    const contact = contacts.map((item: any) => <Item key={item.id} onClick={() => changeDialog(item.id - 1)}>
-        <NavLink to={`/dialogs/${item.id}`}>{item.name}</NavLink>
-    </Item>);
+    const contact = contacts.map((item: any) => <Menu.Item key={item.id} onClick={() => changeDialog(item.id)}>
+        <NavLink to={`/dialogs/${item.id}`}>
+            {item.name}
+        </NavLink>
+    </Menu.Item>);
 
-    // const path = "/dialogs/" + id;
     return (
-        <List>
+        <Menu
+            defaultOpenKeys={['sub1']}
+            mode="inline">
             {contact}
-        </List>
+        </Menu>
 
     )
 };

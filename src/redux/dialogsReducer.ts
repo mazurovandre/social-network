@@ -32,12 +32,7 @@ let initialState: InitialStateType = {
                 {id: 3, text: 'How are you?', isOutcome: false},
                 {id: 4, text: `I'm fine`, isOutcome: true}
             ]},
-        {id: 5, name: 'Jim', dialog: [
-                {id: 1, text: 'Hi Jim!', isOutcome: false},
-                {id: 2, text: 'Hello)', isOutcome: true},
-                {id: 3, text: 'How are you?', isOutcome: false},
-                {id: 4, text: `I'm fine`, isOutcome: true}
-            ]},
+        {id: 5, name: 'Jim', dialog: []},
         {id: 6, name: 'Vlad', dialog: [
                 {id: 1, text: 'Hi Vlad!', isOutcome: false},
                 {id: 2, text: 'Hello)', isOutcome: true},
@@ -76,15 +71,15 @@ const dialogsReducer = (state = initialState, action: DialogsReducerActionType):
     }
 }
 
-type DialogsReducerActionType = SentMessageActionCreatorType
+type DialogsReducerActionType = SentMessageACType
 
-type SentMessageActionCreatorType = {
+type SentMessageACType = {
     type: typeof SENT_MESSAGE
     index: number
     text: string
 }
 
-export const sentMessageActionCreator = (index: number, text: string): SentMessageActionCreatorType =>
+export const sentMessageAC = (index: number, text: string): SentMessageACType =>
     ({type: SENT_MESSAGE, index, text});
 
 export default dialogsReducer;

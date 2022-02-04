@@ -1,10 +1,10 @@
 import React, {FC} from "react";
-import style from './Sidebar.module.sass';
+import style from './Navbar.module.sass';
 import {NavLink} from "react-router-dom";
 import Menu from "antd/lib/menu";
 import {CommentOutlined, TeamOutlined, UserOutlined} from "@ant-design/icons/lib";
 
-const Sidebar:FC = () => {
+const Navbar:FC = () => {
     return (
             <nav className={style.sidebar}>
                 <Menu
@@ -30,5 +30,5 @@ const Sidebar:FC = () => {
     );
 }
 
-export default Sidebar;
+export default Navbar;
 

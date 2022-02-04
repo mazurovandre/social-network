@@ -4,7 +4,7 @@ import '../../index.css'
 import logo from '../../images/logo.svg';
 import {HeaderProps} from './HeaderContainer'
 import Button from "antd/lib/button/button";
-import Sidebar from "./Sidebar/Sidebar";
+import Navbar from "./Navbar/Navbar";
 import Col from "antd/lib/grid/col";
 import Row from "antd/lib/grid/row";
 import {Dropdown} from "antd";
@@ -35,7 +35,7 @@ const Header: FC<HeaderProps> = ({login, isAuth, logoutThunk}) => {
                     </div>
                 </Col>
                 <Col span={18}>
-                    <Sidebar/>
+                    <Navbar/>
                 </Col>
                 <Col span={4}>
                     <div className={style.login}>

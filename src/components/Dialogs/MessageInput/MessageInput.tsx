@@ -1,27 +1,38 @@
-// import React, {FC, useRef} from "react";
-// import style from './MessageInput.module.sass';
-// import {MessageInputContainerType} from "./MessageInputContainer";
-//
-//
-// const MessageInput:FC<MessageInputContainerType> = ({messageText, changeMessageArea, sentMessage}) => {
-//     const messageArea = useRef<HTMLInputElement>(null);
-//
-//     const changeMessageField = () => {
-//         if (messageArea.current) {
-//             let text = messageArea.current.value;
-//             changeMessageArea(text);
-//         }
-//     };
-//
-//     return (
-//         <form className={style.message} onSubmit={event => {
-//             event.preventDefault();
-//             sentMessage();
-//         }}>
-//             <input type='text' ref={messageArea} className={style.textarea} onChange={changeMessageField} value={messageText}/>
-//             <button type='submit' className={style.btn}>Sent</button>
-//         </form>
-//     )
-// }
-//
-// export default MessageInput;
+import React, {FC} from "react";
+import style from './MessageInput.module.sass';
+import {Field, Form, Formik} from "formik";
+import Button from "antd/lib/button/button";
+import SendOutlined from "@ant-design/icons/lib/icons/SendOutlined";
+
+
+type MessageInputPropsType = {
+    id: number | null
+    sentMessage: (index: number, text: string) => void
+}
+
+const MessageInput:FC<MessageInputPropsType> = ({id, sentMessage}) => {
+    const idNumber = Number(id) - 1;
+
+    const initialValues = {
+        text: ''
+    }
+
+    return (
+        <Formik
+            initialValues={initialValues}
+            onSubmit={(values, {resetForm}) => {
+                sentMessage(idNumber, values.text);
+                resetForm({values: initialValues})
+            }}>
+            {id && <Form className={style.form}>
+                <Field className={style.textarea} name='text'/>
+                <Button htmlType='submit' type='primary'>
+                    <SendOutlined /> Post
+                </Button>
+            </Form>}
+
+        </Formik>
+    )
+}
+
+export default MessageInput;

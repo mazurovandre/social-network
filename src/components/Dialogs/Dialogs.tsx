@@ -1,14 +1,15 @@
-import React, {FC, useEffect, useRef, useState} from "react";
+import React, {FC, useState} from "react";
 import style from './Dialogs.module.sass';
 import DialogList from "./DialogList/DialogList";
-import Message from "./Message/Message";
-// import MessageInputContainer from "./MessageInput/MessageInputContainer";
-import {InitialStateType as DialogsProps} from "../../redux/dialogsReducer";
+import MessageList from "./MessageList/MessageList";
+import Empty from "antd/lib/empty";
+import {DialogsContainerPropsType as DialogsPropsType} from "./DialogsContainer";
+import MessageInput from "./MessageInput/MessageInput";
 
 
-const Dialogs:FC<DialogsProps> = ({dialogsData}) => {
+const Dialogs:FC<DialogsPropsType> = ({dialogsData, sentMessage}) => {
 
-    const [selectedDialog, setSelectedDialog] = useState(1)
+    const [selectedDialog, setSelectedDialog] = useState(null)
 
     const contacts = dialogsData.map(data => {
         return {
@@ -17,18 +18,11 @@ const Dialogs:FC<DialogsProps> = ({dialogsData}) => {
         }
     })
 
-    const messages = dialogsData[selectedDialog].dialog.map(message =>
-        <Message key={message.id} message={message.text} isOutcome={message.isOutcome}/>);
-
-    const messagesEndRef = useRef<null | HTMLLIElement>(null)
-
-    const scrollToBottom = (): void => {
-        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
-    }
-
-    useEffect(() => {
-        scrollToBottom()
-    }, [messages]);
+    const messages = dialogsData.map(data => {
+        return {
+            dialog: data.dialog
+        }
+    })
 
     return (
         <div className={style.dialogs}>
@@ -40,12 +34,13 @@ const Dialogs:FC<DialogsProps> = ({dialogsData}) => {
                 <div className={style.messages}>
                     <h4 className={style.title}>Messages:</h4>
                     <div className={style.messages_block}>
-                        <ul className={style.messages_list}>
-                            {messages}
-                            <li ref={messagesEndRef}/>
-                        </ul>
+                        {!selectedDialog &&
+                            <div className={style.icon_block}>
+                                <Empty description={'Choose your contact'} />
+                            </div>}
+                        {selectedDialog && <MessageList messages={messages} id={selectedDialog}/>}
                     </div>
-                    {/*<MessageInputContainer />*/}
+                    <MessageInput id={selectedDialog} sentMessage={sentMessage} />
                 </div>
             </div>
         </div>
