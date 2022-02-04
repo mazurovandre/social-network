@@ -3,8 +3,8 @@
   justify-content: space-between
   align-items: stretch
   margin: 15px 0
-  border: 1px solid #E7E8EC
-  padding: 10px
+  box-shadow: 0 2px 8px #c7c7c7
+  padding: 10px 30px
   &:first-child
     margin-top: 0
   &:last-child
@@ -28,17 +28,16 @@
     background-color: #9bbde7
 
 .left
-  flex-basis: 20%
   display: flex
   flex-direction: column
   justify-content: flex-start
   align-items: center
-  min-width: 125px
+  width: 100px
 
 .center
   flex-grow: 1
-  flex-basis: 50%
-  padding: 0 4%
+  margin-left: 4%
+  overflow: hidden
   display: flex
   flex-direction: column
 
@@ -55,8 +54,9 @@
 
 .status
   margin: 0
-  font-weight: 400
+  font-weight: 300
   font-style: italic
+  text-overflow: ellipsis
 
 .right
   padding: 0 2%

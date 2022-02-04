@@ -25,12 +25,11 @@ const MessageInput:FC<MessageInputPropsType> = ({id, sentMessage}) => {
                 resetForm({values: initialValues})
             }}>
             {id && <Form className={style.form}>
-                <Field className={style.textarea} name='text'/>
-                <Button htmlType='submit' type='primary'>
-                    <SendOutlined /> Post
+                <Field className={style.input} name='text'/>
+                <Button className={style.btn} htmlType='submit' type='primary'>
+                    <SendOutlined /> Sent
                 </Button>
             </Form>}
-
         </Formik>
     )
 }
