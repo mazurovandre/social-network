@@ -53,7 +53,7 @@ const profileReducer = (state = initialState, action: ActionType): InitialStateT
                 profile: action.profile
             }
         case SET_LIKE:
-            let postWithLike = state.postsData[action.index];
+            let postWithLike = {...state.postsData[action.index]};
             postWithLike.isLiked ? postWithLike.likesCount -= 1 : postWithLike.likesCount += 1;
             postWithLike.isLiked = !postWithLike.isLiked
             return {

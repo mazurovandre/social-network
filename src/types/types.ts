@@ -1,9 +1,10 @@
 export type DialogType = {
     id: number
     name: string
+    dialog: Array<MessageType>
 }
 
-export type MessageType = {
+type MessageType = {
     id: number
     text: string
     isOutcome: boolean

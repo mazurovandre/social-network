@@ -1,74 +1,90 @@
 import {DialogType} from '../types/types'
-import {MessageType} from '../types/types'
 
-const CHANGE_MESSAGE_AREA = 'CHANGE-MESSAGE-AREA';
 const SENT_MESSAGE = 'SENT-MESSAGE';
 
-type InitialStateType = {
+export type InitialStateType = {
     dialogsData: Array<DialogType>
-    dialogsMessages: Array<MessageType>
-    messageText: string
 }
 
 let initialState: InitialStateType = {
     dialogsData: [
-        {id: 1, name: 'Andrey'},
-        {id: 2, name: 'Michael'},
-        {id: 3, name: 'Kate'},
-        {id: 4, name: 'Rachel'},
-        {id: 5, name: 'Vlad'},
-        {id: 6, name: 'John'},
-        {id: 7, name: 'Tom'}
-    ],
-    dialogsMessages: [
-        {id: 1, text: 'Hi!', isOutcome: false},
-        {id: 2, text: 'Hello)', isOutcome: true},
-        {id: 3, text: 'How are you?', isOutcome: false},
-        {id: 4, text: `I'm fine`, isOutcome: true}
-    ],
-    messageText: ''
+        {id: 1, name: 'Andrey', dialog: [
+                {id: 1, text: 'Hi Andrey!', isOutcome: false},
+                {id: 2, text: 'Hello)', isOutcome: true},
+                {id: 3, text: 'How are you?', isOutcome: false},
+                {id: 4, text: `I'm fine`, isOutcome: true}
+            ]},
+        {id: 2, name: 'Michael', dialog: [
+                {id: 1, text: 'Hi Michael!', isOutcome: false},
+                {id: 2, text: 'Hello)', isOutcome: true},
+                {id: 3, text: 'How are you?', isOutcome: false},
+                {id: 4, text: `I'm fine`, isOutcome: true}
+            ]},
+        {id: 3, name: 'Kate', dialog: [
+                {id: 1, text: 'Hi Kate!', isOutcome: false},
+                {id: 2, text: 'Hello)', isOutcome: true},
+                {id: 3, text: 'How are you?', isOutcome: false},
+                {id: 4, text: `I'm fine`, isOutcome: true}
+            ]},
+        {id: 4, name: 'Rachel', dialog: [
+                {id: 1, text: 'Hi Rachel!', isOutcome: false},
+                {id: 2, text: 'Hello)', isOutcome: true},
+                {id: 3, text: 'How are you?', isOutcome: false},
+                {id: 4, text: `I'm fine`, isOutcome: true}
+            ]},
+        {id: 5, name: 'Jim', dialog: [
+                {id: 1, text: 'Hi Jim!', isOutcome: false},
+                {id: 2, text: 'Hello)', isOutcome: true},
+                {id: 3, text: 'How are you?', isOutcome: false},
+                {id: 4, text: `I'm fine`, isOutcome: true}
+            ]},
+        {id: 6, name: 'Vlad', dialog: [
+                {id: 1, text: 'Hi Vlad!', isOutcome: false},
+                {id: 2, text: 'Hello)', isOutcome: true},
+                {id: 3, text: 'How are you?', isOutcome: false},
+                {id: 4, text: `I'm fine`, isOutcome: true}
+            ]},
+        {id: 7, name: 'Tom', dialog: [
+                {id: 1, text: 'Hi Tom!', isOutcome: false},
+                {id: 2, text: 'Hello)', isOutcome: true},
+                {id: 3, text: 'How are you?', isOutcome: false},
+                {id: 4, text: `I'm fine`, isOutcome: true}
+            ]}
+    ]
 }
 
 const dialogsReducer = (state = initialState, action: DialogsReducerActionType): InitialStateType => {
     switch (action.type) {
-        case CHANGE_MESSAGE_AREA:
-            return {
-                ...state,
-                messageText: action.newText
-            }
         case SENT_MESSAGE:
+            let dataWithNewMessage = {...state.dialogsData[action.index]};
+            dataWithNewMessage.dialog = [...state.dialogsData[action.index].dialog]
             const newMessage = {
-                id: state.dialogsMessages.length + 1,
-                text: state.messageText,
+                id: state.dialogsData[action.index].dialog.length + 1,
+                text: action.text,
                 isOutcome: true
             };
-            if (newMessage.text) {
-                return {
-                    ...state,
-                    messageText: '',
-                    dialogsMessages: [...state.dialogsMessages, newMessage]
-                }
+            dataWithNewMessage.dialog.push(newMessage)
+            return {
+                dialogsData: [
+                    ...state.dialogsData.slice(0, action.index),
+                    dataWithNewMessage,
+                    ...state.dialogsData.slice(action.index + 1)
+                ]
             }
-            return state;
         default:
             return state;
     }
 }
 
-type DialogsReducerActionType = ChangeMessageAreaActionCreatorType | SentMessageActionCreatorType
+type DialogsReducerActionType = SentMessageActionCreatorType
 
-type ChangeMessageAreaActionCreatorType = {
-    type: typeof CHANGE_MESSAGE_AREA;
-    newText: string
-}
 type SentMessageActionCreatorType = {
     type: typeof SENT_MESSAGE
+    index: number
+    text: string
 }
 
-export const changeMessageAreaActionCreator = (text: string): ChangeMessageAreaActionCreatorType =>
-    ({type: CHANGE_MESSAGE_AREA, newText: text});
-
-export const sentMessageActionCreator = (): SentMessageActionCreatorType =>
-    ({type: SENT_MESSAGE});
+export const sentMessageActionCreator = (index: number, text: string): SentMessageActionCreatorType =>
+    ({type: SENT_MESSAGE, index, text});
 
 export default dialogsReducer;

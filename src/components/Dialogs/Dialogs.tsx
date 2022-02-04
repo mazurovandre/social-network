@@ -1,14 +1,24 @@
-import React, {FC, useEffect, useRef} from "react";
+import React, {FC, useEffect, useRef, useState} from "react";
 import style from './Dialogs.module.sass';
-import DialogName from "./DialogName/DialogName";
+import DialogList from "./DialogList/DialogList";
 import Message from "./Message/Message";
-import MessageInputContainer from "./MessageInput/MessageInputContainer";
-import {MapStateToPropsType as DialogsProps} from "./DialogsContainer";
+// import MessageInputContainer from "./MessageInput/MessageInputContainer";
+import {InitialStateType as DialogsProps} from "../../redux/dialogsReducer";
 
 
-const Dialogs:FC<DialogsProps> = ({dialogsData, dialogsMessages}) => {
-    const dialogs = dialogsData.map(person => <DialogName key={person.id} name={person.name} id={person.id}/>);
-    const messages = dialogsMessages.map(message => <Message key={message.id} message={message.text} isOutcome={message.isOutcome}/>);
+const Dialogs:FC<DialogsProps> = ({dialogsData}) => {
+
+    const [selectedDialog, setSelectedDialog] = useState(1)
+
+    const contacts = dialogsData.map(data => {
+        return {
+            id: data.id,
+            name: data.name
+        }
+    })
+
+    const messages = dialogsData[selectedDialog].dialog.map(message =>
+        <Message key={message.id} message={message.text} isOutcome={message.isOutcome}/>);
 
     const messagesEndRef = useRef<null | HTMLLIElement>(null)
 
@@ -25,9 +35,7 @@ const Dialogs:FC<DialogsProps> = ({dialogsData, dialogsMessages}) => {
             <div className={style.content}>
                 <div className={style.people}>
                     <h4 className={style.title}>Contacts:</h4>
-                    <ul className={style.people_list}>
-                        {dialogs}
-                    </ul>
+                    <DialogList contacts={contacts} changeDialog={setSelectedDialog}/>
                 </div>
                 <div className={style.messages}>
                     <h4 className={style.title}>Messages:</h4>
@@ -37,7 +45,7 @@ const Dialogs:FC<DialogsProps> = ({dialogsData, dialogsMessages}) => {
                             <li ref={messagesEndRef}/>
                         </ul>
                     </div>
-                    <MessageInputContainer />
+                    {/*<MessageInputContainer />*/}
                 </div>
             </div>
         </div>
