@@ -10,7 +10,7 @@ import Preloader from "./components/common/Preloader/Preloader";
 import {AppStateType} from "./redux/redux-store";
 import {withSuspense} from "./hoc/withSuspense";
 import withUserID from "./hoc/withUserID";
-import 'antd/dist/antd.css';
+import 'antd/dist/antd.min.css';
 import {Layout} from 'antd';
 const {Header, Content} = Layout;
 

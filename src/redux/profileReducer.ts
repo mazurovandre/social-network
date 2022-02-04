@@ -9,7 +9,8 @@ const SET_STATUS = 'SET_STATUS';
 export type postsDataType = {
     id: number;
     message: string;
-    likesCount: number
+    likesCount: number;
+    isLiked: boolean
 }
 type InitialStateType = {
     postsData: Array<postsDataType>;
@@ -19,11 +20,11 @@ type InitialStateType = {
 
 let initialState: InitialStateType = {
     postsData: [
-        {id: 1, message: 'Hello, it\'s me', likesCount: 11},
-        {id: 2, message: 'I was wondering if after all these years you\'d like to meet', likesCount: 123},
-        {id: 3, message: 'To go over everything', likesCount: 532},
-        {id: 4, message: 'They say that time\'s supposed to heal ya', likesCount: 251},
-        {id: 5, message: 'But I ain\'t done much healing', likesCount: 252}
+        {id: 1, message: 'Hello, it\'s me', likesCount: 11, isLiked: false},
+        {id: 2, message: 'I was wondering if after all these years you\'d like to meet', likesCount: 123, isLiked: true},
+        {id: 3, message: 'To go over everything', likesCount: 532, isLiked: true},
+        {id: 4, message: 'They say that time\'s supposed to heal ya', likesCount: 251, isLiked: false},
+        {id: 5, message: 'But I ain\'t done much healing', likesCount: 252, isLiked: false}
     ],
     profile: null,
     status: ''
@@ -35,7 +36,8 @@ const profileReducer = (state = initialState, action: ActionType): InitialStateT
             const newPost = {
                 id: state.postsData.length + 1,
                 message: action.text,
-                likesCount: 0
+                likesCount: 0,
+                isLiked: false
             };
             if (newPost.message !== '') {
                 return {
@@ -52,7 +54,8 @@ const profileReducer = (state = initialState, action: ActionType): InitialStateT
             }
         case SET_LIKE:
             let postWithLike = state.postsData[action.index];
-            action.isLike ? postWithLike.likesCount += 1 : postWithLike.likesCount -= 1;
+            postWithLike.isLiked ? postWithLike.likesCount -= 1 : postWithLike.likesCount += 1;
+            postWithLike.isLiked = !postWithLike.isLiked
             return {
                 ...state,
                 postsData: [
@@ -71,17 +74,16 @@ const profileReducer = (state = initialState, action: ActionType): InitialStateT
     }
 }
 
-type ActionType = AddPostACType | SetLikeACType | SetUserProfileACType | SetStatusACType
+type ActionType = AddPostACType | ToggleLikeACType | SetUserProfileACType | SetStatusACType
 
 export type AddPostACType = {
     type: typeof ADD_POST,
     text: string
 }
 
-export type SetLikeACType = {
+export type ToggleLikeACType = {
     type: typeof SET_LIKE,
-    index: number,
-    isLike: boolean
+    index: number
 }
 
 type SetUserProfileACType = {
@@ -96,7 +98,7 @@ type SetStatusACType = {
 // AC = Action Creator
 
 export const addPostAC = (text: string): AddPostACType => ({type: ADD_POST, text});
-export const setLikeAC = (index: number, isLike: boolean): SetLikeACType => ({type: SET_LIKE, index, isLike});
+export const toggleLikeAC = (index: number): ToggleLikeACType => ({type: SET_LIKE, index});
 export const setUserProfileAC = (profile: any): SetUserProfileACType => ({type: SET_USER_PROFILE, profile});
 export const setStatusAC = (status: string): SetStatusACType => ({type: SET_STATUS, status});
 

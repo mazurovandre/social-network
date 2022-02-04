@@ -4,9 +4,9 @@ import Post from "./Post/Post";
 import {PostsContainerType} from "./PostsContainer";
 import PostForm from "./PostForm/PostForm";
 
-const Posts:FC<PostsContainerType> = ({postsData, addPost, isMyPage, setLike}) => {
+const Posts:FC<PostsContainerType> = ({postsData, addPost, isMyPage, toggleLike}) => {
 
-    const posts = postsData.map((state, index) => <Post key={state.id} index={index} message={state.message} likesCount={state.likesCount} setLike={setLike}/>);
+    const posts = postsData.map((state, index) => <Post key={state.id} index={index} isLiked={state.isLiked} message={state.message} likesCount={state.likesCount} toggleLike={toggleLike}/>);
 
     if (isMyPage) {
         return (
