@@ -1,11 +1,9 @@
 import Posts from "./Posts";
 import {connect} from "react-redux";
 import {
-    addPostActionCreator,
-    AddPostActionCreatorType,
-    onPostChangeActionCreator,
-    OnPostChangeActionCreatorType,
-    postsDataType
+    addPostAC,
+    AddPostACType,
+    postsDataType, setLikeAC, SetLikeACType
 } from "../../../redux/profileReducer";
 import {AppStateType} from "../../../redux/redux-store";
 import {ProfileType} from "../Profile";
@@ -13,31 +11,28 @@ import {Dispatch} from "redux";
 
 type MapStateToPropsType = {
     postsData: Array<postsDataType>
-    newPostText: string
 }
 type MapDispatchToPropsType = {
-    addPost: () => void
-    onPostChange: (text: string) => void
+    addPost: (text: string) => void
+    setLike: (index: number, isLike: boolean) => void
 }
 
 export type PostsContainerType = MapStateToPropsType & MapDispatchToPropsType & ProfileType
 
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {
-        postsData: state.profilePage.postsData,
-        newPostText: state.profilePage.newPostText
+        postsData: state.profilePage.postsData
     }
 }
 
-const mapDispatchToProps = (dispatch: Dispatch<AddPostActionCreatorType | OnPostChangeActionCreatorType>): MapDispatchToPropsType => {
+const mapDispatchToProps = (dispatch: Dispatch<AddPostACType | SetLikeACType>): MapDispatchToPropsType => {
     return {
-        addPost: () => {
-            dispatch(addPostActionCreator());
+        addPost: (text) => {
+            dispatch(addPostAC(text));
         },
-        onPostChange: (text) => {
-            let action = onPostChangeActionCreator(text);
-            dispatch(action);
-        },
+        setLike: (index, isLike) => {
+            dispatch(setLikeAC(index, isLike))
+        }
     }
 }
 

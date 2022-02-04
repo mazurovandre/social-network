@@ -1,31 +1,17 @@
-import React, {FC, useRef} from "react";
+import React, {FC} from "react";
 import style from './Posts.module.sass';
 import Post from "./Post/Post";
 import {PostsContainerType} from "./PostsContainer";
+import PostForm from "./PostForm/PostForm";
 
-const Posts:FC<PostsContainerType> = ({postsData, addPost, onPostChange, newPostText, isMyPage}) => {
+const Posts:FC<PostsContainerType> = ({postsData, addPost, isMyPage, setLike}) => {
 
-    const posts = postsData.map(state => <Post key={state.id} state={state}/>);
-    const newPostElement = useRef<HTMLTextAreaElement | null>(null);
+    const posts = postsData.map((state, index) => <Post key={state.id} index={index} message={state.message} likesCount={state.likesCount} setLike={setLike}/>);
 
-    const changePost = () => {
-        if (newPostElement.current) {
-            const text = newPostElement.current.value;
-            onPostChange(text);
-        }
-    }
     if (isMyPage) {
         return (
             <div className={style.posts}>
-                <form className={style.form} onSubmit={event => {
-                    event.preventDefault();
-                    addPost();
-                }}>
-                    <h5 className={style.title}>My posts:</h5>
-                    <textarea ref={newPostElement} name="form" id="form" cols={30} rows={10} placeholder="Write what's on your mind"
-                              value={newPostText} onChange={changePost}/>
-                    <button type='submit'>Post</button>
-                </form>
+                <PostForm addPost={addPost}/>
                 <ul className={style.list}>
                     {posts}
                 </ul>

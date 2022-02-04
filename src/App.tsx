@@ -1,5 +1,6 @@
 import React, {FC, useEffect} from "react";
 import style from './App.module.sass';
+import './index.css'
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from "./components/Login/Login";
@@ -11,9 +12,7 @@ import {withSuspense} from "./hoc/withSuspense";
 import withUserID from "./hoc/withUserID";
 import 'antd/dist/antd.css';
 import {Layout} from 'antd';
-
 const {Header, Content} = Layout;
-
 
 const DialogsContainer = React.lazy(() => import("./components/Dialogs/DialogsContainer"))
 const UsersContainer = React.lazy(() => import("./components/Users/UsersContainer"))
@@ -27,19 +26,18 @@ const App: FC<MapStateToPropsType & MapDispatchToPropsType> = ({isInitialized, i
 
     useEffect(() => {
         initializeThunk();
-    },)
+    })
 
-    if (!isInitialized) {
-        return <Preloader/>
-    }
+    if (!isInitialized) return <Preloader/>
+
     return (
         <BrowserRouter>
-            <Layout style={{backgroundColor: '#EDEEF0'}}>
-                <Header className={style.header} style={{padding: '0px'}}>
+            <Layout style={{backgroundColor: 'white'}}>
+                <Header className={style.header} style={{backgroundColor: 'white', padding: '0px'}}>
                     <HeaderContainer/>
                 </Header>
-                <Layout style={{backgroundColor: '#EDEEF0'}}>
-                    <Content className={style.main_content}>
+                <Layout style={{backgroundColor: 'white'}}>
+                    <Content className='container' style={{padding: '20px'}}>
                         <Routes>
                             <Route path="*" element={<LazyProfileContainer/>}/>
                             <Route path="/profile/:ID/*" element={<LazyProfileContainer/>}/>
@@ -51,7 +49,6 @@ const App: FC<MapStateToPropsType & MapDispatchToPropsType> = ({isInitialized, i
                 </Layout>
             </Layout>
         </BrowserRouter>
-
     )
 };
 
@@ -66,4 +63,5 @@ type MapDispatchToPropsType = {
     initializeThunk: () => void
 }
 
-export default connect<MapStateToPropsType, MapDispatchToPropsType, {}, AppStateType>(mapStateToProps, {initializeThunk})(App);
+export default connect<MapStateToPropsType, MapDispatchToPropsType, {}, AppStateType>
+(mapStateToProps, {initializeThunk})(App);

@@ -1,8 +1,8 @@
 import {profileAPI} from "../api/api";
 import {ResultCodes} from "../types/types";
 
-const ADD_POST = 'ADD-POST';
-const ON_POST_CHANGE = 'ON-POST-CHANGE';
+const ADD_POST = 'ADD_POST';
+const SET_LIKE = 'SET_LIKE';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const SET_STATUS = 'SET_STATUS';
 
@@ -13,7 +13,6 @@ export type postsDataType = {
 }
 type InitialStateType = {
     postsData: Array<postsDataType>;
-    newPostText: string;
     profile: any;
     status: string
 }
@@ -26,7 +25,6 @@ let initialState: InitialStateType = {
         {id: 4, message: 'They say that time\'s supposed to heal ya', likesCount: 251},
         {id: 5, message: 'But I ain\'t done much healing', likesCount: 252}
     ],
-    newPostText: '',
     profile: null,
     status: ''
 }
@@ -36,27 +34,32 @@ const profileReducer = (state = initialState, action: ActionType): InitialStateT
         case ADD_POST:
             const newPost = {
                 id: state.postsData.length + 1,
-                message: state.newPostText,
+                message: action.text,
                 likesCount: 0
             };
             if (newPost.message !== '') {
                 return {
                     ...state,
-                    postsData: [...state.postsData, newPost],
-                    newPostText: ''
+                    postsData: [newPost, ...state.postsData]
                 }
             } else {
                 return state;
-            }
-        case ON_POST_CHANGE:
-            return {
-                ...state,
-                newPostText: action.newText
             }
         case SET_USER_PROFILE:
             return {
                 ...state,
                 profile: action.profile
+            }
+        case SET_LIKE:
+            let postWithLike = state.postsData[action.index];
+            action.isLike ? postWithLike.likesCount += 1 : postWithLike.likesCount -= 1;
+            return {
+                ...state,
+                postsData: [
+                    ...state.postsData.slice(0, action.index),
+                    postWithLike,
+                    ...state.postsData.slice(action.index + 1)
+                ]
             }
         case SET_STATUS:
             return {
@@ -68,47 +71,53 @@ const profileReducer = (state = initialState, action: ActionType): InitialStateT
     }
 }
 
-type ActionType = AddPostActionCreatorType | OnPostChangeActionCreatorType | SetUserProfileType | SetStatusType
+type ActionType = AddPostACType | SetLikeACType | SetUserProfileACType | SetStatusACType
 
-export type AddPostActionCreatorType = {
-    type: typeof ADD_POST
+export type AddPostACType = {
+    type: typeof ADD_POST,
+    text: string
 }
-export type OnPostChangeActionCreatorType = {
-    type: typeof ON_POST_CHANGE;
-    newText: string
+
+export type SetLikeACType = {
+    type: typeof SET_LIKE,
+    index: number,
+    isLike: boolean
 }
-type SetUserProfileType = {
+
+type SetUserProfileACType = {
     type: typeof SET_USER_PROFILE
     profile: any
 }
-type SetStatusType = {
+type SetStatusACType = {
     type: typeof SET_STATUS
     status: string
 }
 
-export const addPostActionCreator = (): AddPostActionCreatorType => ({type: ADD_POST});
-export const onPostChangeActionCreator = (text: string): OnPostChangeActionCreatorType => ({type: ON_POST_CHANGE, newText: text});
-export const setUserProfile = (profile: any): SetUserProfileType => ({type: SET_USER_PROFILE, profile});
-export const setStatus = (status: string): SetStatusType => ({type: SET_STATUS, status});
+// AC = Action Creator
+
+export const addPostAC = (text: string): AddPostACType => ({type: ADD_POST, text});
+export const setLikeAC = (index: number, isLike: boolean): SetLikeACType => ({type: SET_LIKE, index, isLike});
+export const setUserProfileAC = (profile: any): SetUserProfileACType => ({type: SET_USER_PROFILE, profile});
+export const setStatusAC = (status: string): SetStatusACType => ({type: SET_STATUS, status});
 
 
 export const getUserThunk = (id: number) => (dispatch: any): void => {
     profileAPI.getUser(id)
         .then(data => {
-            dispatch(setUserProfile(data));
+            dispatch(setUserProfileAC(data));
         })
 }
 
 export const getUserStatusThunk = (userId: number) => (dispatch: any): void => {
     profileAPI.getStatus(userId).then(response => {
-        dispatch(setStatus(response.data))
+        dispatch(setStatusAC(response.data))
     })
 }
 
 export const updateUserStatusThunk = (status: string) => (dispatch: any): void => {
     profileAPI.updateStatus(status).then((response: any) => {
         if (response.data.resultCode === ResultCodes.Success) {
-            dispatch(setStatus(status))
+            dispatch(setStatusAC(status))
         }
     })
 }
