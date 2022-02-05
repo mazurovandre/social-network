@@ -10,13 +10,14 @@
 * React (React hooks, React-router-dom, Lazy/Suspense)
 * Redux (Redux-Thunk, reselect)
 * TypeScript
+* Ant Design
 * Axios
-* Formik (Yup)
+* Formik (Yup, Formik-antd)
+
 -----------
 
 ##### Ближайшие цели по модернизации проекта:
 
-* Полностью изменить дизайн с помощью Ant Design
 * Реализовать чат с помощью WebSocket
 * Написать и внедрить на проект свою API, что позволит:
   * Регистрироваться на сайте
