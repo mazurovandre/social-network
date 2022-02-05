@@ -9,41 +9,36 @@ export type InitialStateType = {
 let initialState: InitialStateType = {
     dialogsData: [
         {id: 1, name: 'Andrey', dialog: [
-                {id: 1, text: 'Hi Andrey!', isOutcome: false},
-                {id: 2, text: 'Hello)', isOutcome: true},
-                {id: 3, text: 'How are you?', isOutcome: false},
-                {id: 4, text: `I'm fine`, isOutcome: true}
+                {id: 1, text: 'Hello!', isOutcome: false},
+                {id: 2, text: 'Hi Andrey!', isOutcome: true},
+                {id: 3, text: 'How is your social network doing?)', isOutcome: false},
+                {id: 4, text: `Yo...`, isOutcome: false}
             ]},
         {id: 2, name: 'Michael', dialog: [
-                {id: 1, text: 'Hi Michael!', isOutcome: false},
-                {id: 2, text: 'Hello)', isOutcome: true},
-                {id: 3, text: 'How are you?', isOutcome: false},
-                {id: 4, text: `I'm fine`, isOutcome: true}
+                {id: 1, text: 'Yo!', isOutcome: false},
+                {id: 2, text: 'Hello', isOutcome: true},
+                {id: 3, text: 'When you already find a job?', isOutcome: false}
             ]},
         {id: 3, name: 'Kate', dialog: [
-                {id: 1, text: 'Hi Kate!', isOutcome: false},
-                {id: 2, text: 'Hello)', isOutcome: true},
-                {id: 3, text: 'How are you?', isOutcome: false},
-                {id: 4, text: `I'm fine`, isOutcome: true}
+                {id: 1, text: 'Hi=*', isOutcome: false},
+                {id: 2, text: 'Hello, Kate!', isOutcome: true},
+                {id: 3, text: 'Text me when you\'re bored', isOutcome: false}
             ]},
         {id: 4, name: 'Rachel', dialog: [
-                {id: 1, text: 'Hi Rachel!', isOutcome: false},
-                {id: 2, text: 'Hello)', isOutcome: true},
-                {id: 3, text: 'How are you?', isOutcome: false},
-                {id: 4, text: `I'm fine`, isOutcome: true}
+                {id: 1, text: 'Hi)', isOutcome: false}
             ]},
         {id: 5, name: 'Jim', dialog: []},
         {id: 6, name: 'Vlad', dialog: [
-                {id: 1, text: 'Hi Vlad!', isOutcome: false},
-                {id: 2, text: 'Hello)', isOutcome: true},
-                {id: 3, text: 'How are you?', isOutcome: false},
-                {id: 4, text: `I'm fine`, isOutcome: true}
+                {id: 1, text: 'Happy Birthday!', isOutcome: false},
+                {id: 2, text: 'Thank you!', isOutcome: true},
+                {id: 3, text: 'Happy Birthday!', isOutcome: true},
+                {id: 4, text: `Thank you!`, isOutcome: false}
             ]},
-        {id: 7, name: 'Tom', dialog: [
-                {id: 1, text: 'Hi Tom!', isOutcome: false},
-                {id: 2, text: 'Hello)', isOutcome: true},
-                {id: 3, text: 'How are you?', isOutcome: false},
-                {id: 4, text: `I'm fine`, isOutcome: true}
+        {id: 7, name: 'Mark', dialog: [
+                {id: 1, text: 'Oh hi Mark!', isOutcome: true},
+                {id: 2, text: 'Anyway how\'s your sex life', isOutcome: true},
+                {id: 3, text: 'Shut up!', isOutcome: false},
+                {id: 4, text: `Haha, what a story, Mark`, isOutcome: true}
             ]}
     ]
 }
