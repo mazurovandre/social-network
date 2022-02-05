@@ -1,52 +1,34 @@
-import React, {FC, useEffect, useState} from 'react';
-import style from "./Paginator.module.sass"
+import React, {FC} from 'react';
+import {Pagination} from "antd";
+import style from './Paginator.module.sass'
 
 type PaginatorType = {
     totalCount: number
     pageSize: number
-    currentPage: number
-    changeCurrentPage: (num: number) => void
+    changeCurrentPage: (currentPage: number, pageSize: number) => void
+    changePageSize: (pageSize: number) => void
 }
 
-const Paginator: FC<PaginatorType> = ({totalCount, pageSize, currentPage, changeCurrentPage}) => {
-    const portionSize = 10;
-    const totalPages = Math.ceil(totalCount / pageSize);
-    const maxPortionNum = Math.ceil(totalCount / (pageSize * portionSize));
-    const [portionNum, setPortionNum] = useState(1);
-    const [pages, setPages] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
-    useEffect(() => {
-        setPages(createPagesArray(portionNum))
-    }, [portionNum])
+const Paginator: FC<PaginatorType> = ({totalCount, pageSize, changeCurrentPage, changePageSize}) => {
 
-    function createPagesArray(num: number) {
-        const arr = [];
-        let count = 1;
-        for (let i = 1 + ((num - 1) * portionSize); i <= totalPages; i++) {
-            if (count > portionSize) break;
-            arr.push(i);
-            count++;
-        }
-        return arr
+    const onShowSizeChange = (currentPage: number, pageSize: number) => {
+        changePageSize(pageSize);
     }
 
-    const showPrevPortion = () => {
-        setPortionNum(prevState => prevState - 1)
+    const onChange = (currentPage: number, pageSize: number) => {
+        changeCurrentPage(currentPage, pageSize);
     }
-
-    const showNextPortion = () => {
-        setPortionNum(prevState => prevState + 1)
-    }
-
-    const pagesItems = pages.map(num => <li className={num === currentPage ? style.active : undefined} key={num}
-                                            onClick={() => {changeCurrentPage(num)}}>{num}</li>);
 
     return (
-        <div className={style.pagination}>
-        <button disabled={portionNum <= 1} onClick={showPrevPortion}>prev</button>
-        <ul className={style.list}>
-            {pagesItems}
-        </ul>
-        <button disabled={portionNum >= maxPortionNum} onClick={showNextPortion}>next</button>
+        <div className={style.wrapper}>
+            <Pagination
+                showSizeChanger
+                pageSize={pageSize}
+                onShowSizeChange={onShowSizeChange}
+                defaultCurrent={1}
+                onChange={onChange}
+                total={totalCount}
+            />
         </div>
     );
 };

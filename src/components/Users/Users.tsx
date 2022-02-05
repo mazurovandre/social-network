@@ -1,25 +1,26 @@
 import React, {FC} from "react";
 import Paginator from "../common/Paginator/Paginator";
-import {UserType} from "../../types/types";
 import UsersList from "./UsersList/UsersList";
+import {MapStateToPropsType} from "./UsersContainer";
 
-type UsersProps = {
-    users: Array<UserType>
-    totalCount: number
+type UsersPropsType = MapStateToPropsType & ownPropsType
+
+type ownPropsType = {
     pageSize: number
-    currentPage: number
     changeCurrentPage: (currentPage: number) => void
-
+    changePageSize: (pageSize: number) => void
+    toggleFollowUser: (id: number, isFollow: boolean) => void
 }
 
-const Users: FC<UsersProps> = ({users, totalCount, pageSize, currentPage, changeCurrentPage}) => {
+const Users: FC<UsersPropsType> = ({users, totalCount, changeCurrentPage, changePageSize, toggleFollowUser, followingUsers, pageSize}) => {
     return (
         <>
-            <UsersList users={users}/>
-            <Paginator totalCount={totalCount} pageSize={pageSize} currentPage={currentPage}
-                       changeCurrentPage={changeCurrentPage}/>
+            <UsersList users={users} toggleFollowUser={toggleFollowUser} followingUsers={followingUsers}/>
+            <Paginator pageSize={pageSize} totalCount={totalCount} changeCurrentPage={changeCurrentPage}
+                       changePageSize={changePageSize}/>
         </>
     );
+
 }
 
 export default Users;

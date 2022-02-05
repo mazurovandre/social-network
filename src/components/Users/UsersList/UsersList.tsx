@@ -2,20 +2,31 @@ import React, {FC} from 'react';
 import {Avatar, List} from "antd";
 import avatar from "../../../images/avatar.jpg";
 import Button from 'antd/es/button';
+import style from './UsersList.module.sass';
+import {NavLink} from "react-router-dom";
+import {UserType} from "../../../types/types";
 
-const UsersList: FC<any> = ({users}) => {
+type UsersListPropsType = {
+    users: Array<UserType>
+    toggleFollowUser: (id: number, isFollow: boolean) => void
+    followingUsers: Array<number>
+}
+
+const UsersList: FC<UsersListPropsType> = ({users, toggleFollowUser, followingUsers}) => {
     return (
         <List
-            className="demo-loadmore-list"
-            itemLayout="horizontal"
             dataSource={users}
-            renderItem={(item: any) => (
-                <List.Item actions={[
-                    <Button type='primary'>Follow</Button>
+            renderItem={(item: UserType) => (
+                <List.Item className={style.item} actions={[
+                    <Button type='primary' disabled={followingUsers.some((id: number) => item.id === id)}
+                            onClick={() => toggleFollowUser(item.id, !item.followed)}
+                    >{item.followed ? 'Unfollow' : 'Follow'}</Button>
                 ]}>
                     <List.Item.Meta
-                        avatar={<Avatar src={item.photos.small !== null ? item.photos.small : avatar}/>}
-                        title={item.name}
+                        avatar={<NavLink to={`/profile/${item.id}`}>
+                                <Avatar className={style.avatar} src={item.photos.small !== null ? item.photos.small : avatar}/>
+                            </NavLink>}
+                        title={<NavLink to={`/profile/${item.id}`}>{item.name}</NavLink>}
                         description={item.status}
                     />
                 </List.Item>
