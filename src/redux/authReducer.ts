@@ -60,13 +60,13 @@ export const authThunk = (): ThunkType => async dispatch => {
     })
 }
 
-export const loginThunk = ({email, password, rememberMe}: any, setErrorStatus: any): ThunkType => async dispatch => {
+export const loginThunk = ({email, password, rememberMe}: any, setErrorText: any): ThunkType => async dispatch => {
     authAPI.login(email, password, rememberMe = true).then(data => {
         if (data.resultCode === ResultCodes.Success) {
             dispatch(authThunk());
-            setErrorStatus('')
+            setErrorText('')
         } else {
-            setErrorStatus(...data.messages);
+            setErrorText(...data.messages);
         }
     })
 }

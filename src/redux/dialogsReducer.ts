@@ -1,6 +1,6 @@
 import {DialogType} from '../types/types'
 
-const SENT_MESSAGE = 'SENT-MESSAGE';
+const SENT_MESSAGE = 'SENT_MESSAGE';
 
 export type InitialStateType = {
     dialogsData: Array<DialogType>

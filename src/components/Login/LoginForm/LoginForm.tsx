@@ -1,12 +1,20 @@
-import React, {FC, useState} from "react";
+import React, {FC, useState} from 'react';
 import style from './LoginForm.module.sass'
-import {Field, Form, Formik} from "formik";
-import * as Yup from 'yup';
 import {MapDispatchToPropsType as LoginFormType} from "./LoginFormContainer";
+import {Checkbox, Form, Input} from 'formik-antd'
+import {Formik} from 'formik'
+import * as Yup from 'yup';
+import {EyeInvisibleOutlined, EyeTwoTone} from "@ant-design/icons/lib";
+import {Button} from "antd";
 
-const LoginForm:FC<LoginFormType> = ({loginThunk}) => {
 
-    const [errorStatus, setErrorStatus] = useState('');
+const LoginForm: FC<LoginFormType> = ({loginThunk}) => {
+
+    const [errorText, setErrorText] = useState('');
+
+    const onChange = () => {
+        setErrorText('')
+    }
 
     const initialValues = {
         email: '',
@@ -18,45 +26,53 @@ const LoginForm:FC<LoginFormType> = ({loginThunk}) => {
         password: Yup.string().required('Password is required')
     })
 
-    const loginAsGuest = (e: any) => {
-        e.preventDefault()
+    const loginValidation = (value: string) => {
+        if (errorText) return errorText
+    }
+
+    const loginAsGuest = () => {
         loginThunk({
             email: 'free@samuraijs.com',
             password: 'free'
-        }, setErrorStatus)
+        }, setErrorText)
     }
 
     return (
         <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
-            onSubmit={async (values, {resetForm}) => {
-                await new Promise((resolve, reject) => {
-                    resolve(loginThunk(values, setErrorStatus))
-                    reject(resetForm({values: initialValues}))
-                })
+            onSubmit={(values, {setSubmitting}) => {
+                setTimeout(() => {
+                    loginThunk(values, setErrorText)
+                    setSubmitting(false);
+                }, 500);
             }}
         >
             {props => (
                 <Form className={style.form}>
                     <div className={style.block}>
-                        <Field type='text' name='email' placeholder='E-mail'/>
-                        <p className={style.error_message}>
-                            {props.errors.email || errorStatus}
-                        </p>
+                        <Form.Item name='email' validate={loginValidation}>
+                            <Input name='email' placeholder="Enter e-mail" onChange={onChange} validate={loginValidation}/>
+                        </Form.Item>
                     </div>
                     <div className={style.block}>
-                        <Field type='password' name='password' placeholder='Password'/>
-                        <p className={style.error_message}>
-                            {props.errors.password || errorStatus}
-                        </p>
+                        <Form.Item name='password' validate={loginValidation}>
+                            <Input.Password validate={loginValidation}
+                                name='password' onChange={onChange}
+                                placeholder="Enter password"
+                                iconRender={visible => (visible ? <EyeTwoTone/> : <EyeInvisibleOutlined/>)}
+                            />
+                        </Form.Item>
+
+                        <Form.Item name="rememberMe" valuePropName="checked">
+                            <Checkbox name="rememberMe">Remember me</Checkbox>
+                        </Form.Item>
+
                     </div>
                     <div className={style.buttons}>
-                        <button className={style.login_btn} type="submit" disabled={props.isSubmitting}>Log in</button>
-                        <button className={style.guest_btn} onClick={loginAsGuest}
-                                disabled={props.isSubmitting}>Log in as Guest</button>
+                        <Button htmlType="submit" type='primary' disabled={props.isSubmitting}>Log in</Button>
+                        <Button onClick={loginAsGuest} disabled={props.isSubmitting}>Log in as Guest</Button>
                     </div>
-
                 </Form>
             )}
 

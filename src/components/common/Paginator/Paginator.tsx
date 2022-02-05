@@ -5,11 +5,12 @@ import style from './Paginator.module.sass'
 type PaginatorType = {
     totalCount: number
     pageSize: number
+    currentPage: number
     changeCurrentPage: (currentPage: number, pageSize: number) => void
     changePageSize: (pageSize: number) => void
 }
 
-const Paginator: FC<PaginatorType> = ({totalCount, pageSize, changeCurrentPage, changePageSize}) => {
+const Paginator: FC<PaginatorType> = ({totalCount, pageSize, changeCurrentPage, changePageSize, currentPage}) => {
 
     const onShowSizeChange = (currentPage: number, pageSize: number) => {
         changePageSize(pageSize);
@@ -25,7 +26,7 @@ const Paginator: FC<PaginatorType> = ({totalCount, pageSize, changeCurrentPage, 
                 showSizeChanger
                 pageSize={pageSize}
                 onShowSizeChange={onShowSizeChange}
-                defaultCurrent={1}
+                current={currentPage}
                 onChange={onChange}
                 total={totalCount}
             />

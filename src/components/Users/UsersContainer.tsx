@@ -52,6 +52,7 @@ const UsersContainer: FC<UsersContainerPropsType> = ({users, totalCount, getUser
             <Users totalCount={totalCount}
                    pageSize={pageSize}
                    users={users}
+                   currentPage={currentPage}
                    followingUsers={followingUsers}
                    changeCurrentPage={changeCurrentPage}
                    changePageSize={changePageSize}
